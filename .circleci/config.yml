@@ -107,15 +107,15 @@ dockerdeploy: &dockerdeploy
     name: Deploy to Docker Hub
     no_output_timeout: 40m
     command: |
-      cat ${BASH_ENV}
       source ${BASH_ENV}
-      echo "Looking for ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
+      echo "Looking for ${SCHEMA_BUILDER}"
       if [[ -n "$DOCKER_PASS" ]]; then
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push ${SCHEMA_BUILDER}
-            docker push ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}
             echo "Tagging latest image..."
-            docker tag ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} ${SCHEMA_BUILDER}:latest
+            DOCKER_TAG=$(docker images | grep ${SCHEMA_BUILDER} | awk '{print $2}')
+            echo "Found Docker Tag ${DOCKER_TAG}"
+            docker tag ${SCHEMA_BUILDER}:${DOCKER_TAG} ${SCHEMA_BUILDER}:latest
             docker push ${SCHEMA_BUILDER}:latest
       fi
 
