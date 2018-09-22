@@ -56,6 +56,7 @@ schemaenv: &schemaenv
 schemabuilder: &schemabuilder
     name: Build the openschemas/schema-builder container
     command: |
+        source ${BASH_ENV}
         cd /tmp
         git clone https://www.github.com/openschemas/schema-builder
         cd schema-builder
