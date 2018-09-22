@@ -96,9 +96,9 @@ dockersave: &dockersave
     no_output_timeout: 40m
     command: |
         source ${BASH_ENV}
-        echo "Saving ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_TAG} to container.tar.gz"
+        echo "Saving ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} to container.tar.gz"
         mkdir -p /tmp/cache
-        docker save ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_TAG} \
+        docker save ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} \
           | pigz -2 -p 3 > /tmp/cache/container.tar.gz
 
 dockerdeploy: &dockerdeploy
