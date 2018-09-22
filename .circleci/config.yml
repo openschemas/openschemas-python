@@ -73,7 +73,7 @@ schemabuilder: &schemabuilder
         echo "docker exec schema-builder openschemas --version"
         docker exec schema-builder openschemas --version
         SCHEMA_BUILDER_VERSION=$(docker exec schema-builder openschemas --version)
-        echo "Found version ${SCHEMA_BUILDER_VERSION}
+        echo "Found version ${SCHEMA_BUILDER_VERSION}"
         echo "docker tag ${SCHEMA_BUILDER}:latest ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
         docker tag "${SCHEMA_BUILDER}:latest" "${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
         echo "export SCHEMA_BUILDER_VERSION=${SCHEMA_BUILDER_VERSION}" >> ${BASH_ENV}
