@@ -68,6 +68,8 @@ with open('README.md') as filey:
 if __name__ == "__main__":
 
     INSTALL_REQUIRES = get_requirements(lookup)
+    ALL_REQUIRES = get_requirements(lookup, 'ALL_REQUIRES')
+    MAP2MODEL_REQUIRES = get_requrements(lookup, 'MAP2MODEL_REQUIRES')
     TEST_REQUIRES = get_requirements(lookup, 'TEST_REQUIRES')
 
     setup(name=NAME,
@@ -85,8 +87,13 @@ if __name__ == "__main__":
           long_description=LONG_DESCRIPTION,
           keywords=KEYWORDS,
           setup_requires=["pytest-runner"],
-          install_requires = INSTALL_REQUIRES,
+          install_requires = ALL_REQUIRES,
           tests_require = TEST_REQUIRES,
+          extras_require={
+              'map2model': [MAP2MODEL_REQUIRES],
+              'base': [INSTALL_REQUIRES],
+              'all': [ALL_REQUIRES]
+          },
           classifiers=[
               'Intended Audience :: Science/Research',
               'Intended Audience :: Developers',
@@ -98,6 +105,4 @@ if __name__ == "__main__":
               'Programming Language :: Python :: 3',
           ],
 
-          entry_points = {'console_scripts': [ 'ob-paper=openbases.cli.paper:main',
-                                               'ob-icons=openbases.cli.icons:main',
-                                               'ob-badge=openbases.cli.badges:main'] })
+          entry_points = {'console_scripts': [ 'map2model=openschemas.cli.map2model:main'] })
