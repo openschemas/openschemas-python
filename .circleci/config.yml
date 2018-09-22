@@ -20,8 +20,8 @@ defaults: &defaults
 install: &install
     name: Install gzip, gettext, python3, gcc python3-dev, jq, linux-headers
     command: |
-        apk add --no-cache pigz python3 gettext jq gcc python3-dev linux-headers
-        apk-add --no-cache libffi-dev musl-dev openssl-dev py3-pipsshpass
+        apk add --no-cache pigz python3 gettext jq gcc python3-dev linux-headers \
+                           libffi-dev musl-dev openssl-dev py3-pipsshpass
 
 # Tests
 testsetup: &testsetup
