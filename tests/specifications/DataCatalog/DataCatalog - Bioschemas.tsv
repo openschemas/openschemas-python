@@ -1,0 +1,17 @@
+Property	Expected Type	Description	Type	Type URL	BSC Description	Marginality	Cardinality	Controlled Vocabulary	Example
+alternateName	Text	An alias for the item.				Recommended	MANY		
+citation	CreativeWork or  Text	A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.			CreativeWork:Name,URL	Recommended	MANY		
+dataset	Dataset	A dataset contained in this catalog. Inverse property: [includedInDataCatalog](http://schema.org/includedDataCatalog).				Recommended	MANY		
+dateCreated	Date or  DateTime	The date on which the CreativeWork was created or the item was added to a DataFeed.				Recommended	ONE		
+dateModified	Date or  DateTime	The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.			The date on which the data catalog/repository was most recently modified.	Optional	ONE		
+description	Text	A description of the item.				Minimum	ONE		
+fileFormat	Text or  URL	Media type, typically MIME format (see IANA site) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, 'encoding' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.				Optional	MANY		
+identifier	PropertyValue or  Text or  URL	The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](http://schema.org/docs/datamodel.html#identifierBg) for more details.			Unique identifier for the data catalog.	Recommended	ONE		
+keywords	Text	Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.			Use terms from Controlled Vocabularies where possible.	Minimum	ONE		
+license	CreativeWork or  URL	A license document that applies to this content, typically indicated by URL.			CreativeWork:Name,URL	Recommended	ONE		
+name	Text	The name of the item.				Minimum	ONE		
+provider	Organization or  Person	The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.			Contact information for this data repository/catalog.	Minimum	MANY		
+publication	PublicationEvent	A publication event associated with the item.				Recommended	MANY		
+rdf:type	URL		external	https://www.w3.org/1999/02/22-rdf-syntax-ns#type	This is used by validation tools to indentify the profile used. You must use the value specified in the Controlled Vocabulary column.	Minimum	ONE		
+sourceOrganization	Organization	The Organization on whose behalf the creator was working.				Recommended	MANY		
+url	URL	URL of the item.				Minimum	ONE		

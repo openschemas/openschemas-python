@@ -1,0 +1,13 @@
+specifications:
+- name: Container
+  status: revision
+  spec_type: Profile
+  use_cases_url: https://www.github.com/vsoch/bioschema-container
+  version: 0.0.1
+  parent_type: SoftwareApplication
+- name: DataCatalog 
+  status: revision
+  spec_type: Profile
+  use_cases_url: https://www.github.com/vsoch/bioschema-container
+  version: 0.0.1
+  parent_type: CreativeWork
