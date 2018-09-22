@@ -60,10 +60,13 @@ schemabuilder: &schemabuilder
         cd /tmp
         git clone https://www.github.com/openschemas/schema-builder
         cd schema-builder
-        docker build -t ${SCHEMA_BUILDER} .
-        docker exec ${SCHEMA_BUILDER} openschemas --version
+        echo "docker build -t ${SCHEMA_BUILDER} ."
+        docker build -t "${SCHEMA_BUILDER}" .
+        echo "docker exec ${SCHEMA_BUILDER}:latest openschemas --version"
+        docker exec "${SCHEMA_BUILDER}:latest" openschemas --version
         VERSION=$(docker exec ${SCHEMA_BUILDER} openschemas --version)
-        docker tag ${SCHEMA_BUILDER} ${SCHEMA_BUILDER}:${VERSION}
+        echo "docker tag ${SCHEMA_BUILDER}:latest ${SCHEMA_BUILDER}:${VERSION}"
+        docker tag "${SCHEMA_BUILDER}:latest" "${SCHEMA_BUILDER}:${VERSION}"
         echo "export SCHEMA_BUILDER_VERSION=${VERSION}" >> ${BASH_ENV}
 
 # Docker
