@@ -23,6 +23,7 @@ install: &install
         apk add --no-cache pigz python3 gettext jq
         wget https://bootstrap.pypa.io/get-pip.py
         python3 get-pip.py
+        rm get-pip.py
 
 # Tests
 testsetup: &testsetup
