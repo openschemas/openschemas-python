@@ -28,6 +28,12 @@ can be installed with pip:
 pip install openschemas
 ```
 
+## Usage
+
+### map2model
+
+For complete map2model usage, see the [map2model](https://www.github.com/openschemas/map2model) repository.
+
 **under development**
 
 @vsoch will return to these functions after developing the Container specifications.
