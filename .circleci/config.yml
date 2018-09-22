@@ -120,7 +120,6 @@ jobs:
       - run: *schemaenv
       - run: *install
       - checkout
-      - run: *sourceenv
       - run: *testsetup
       - run: *testrun
       - persist_to_workspace:
