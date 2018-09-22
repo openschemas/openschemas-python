@@ -40,9 +40,6 @@ testrun: &testrun
         python setup.py test
 
 # Environment
-sourceenv: &sourceenv
-    name: Source environment variables from the BASH_ENV
-    command: source $BASH_ENV 
 
 schemaenv: &schemaenv
     name: Define container and open bases names
