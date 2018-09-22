@@ -68,7 +68,7 @@ schemabuilder: &schemabuilder
         cd schema-builder
         echo "docker build -f Dockerfile.dev --build-arg OPENSCHEMAS_BRANCH=${CIRCLE_BRANCH} --build-arg OPENSCHEMAS_REPO=${REPO_NAME} -t ${SCHEMA_BUILDER} ."
         docker build -f Dockerfile.dev --build-arg OPENSCHEMAS_BRANCH=${CIRCLE_BRANCH} --build-arg OPENSCHEMAS_REPO=${REPO_NAME} -t ${SCHEMA_BUILDER} .
-        echo "docker run --name schema-builder --entrypoint /bin/bash -td "${SCHEMA_BUILDER}"
+        echo "docker run --name schema-builder --entrypoint /bin/bash -td ${SCHEMA_BUILDER}"
         docker run --name schema-builder --entrypoint /bin/bash -td "${SCHEMA_BUILDER}"
         echo "docker exec schema-builder openschemas --version"
         docker exec schema-builder openschemas --version
