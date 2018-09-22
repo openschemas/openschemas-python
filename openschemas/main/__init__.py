@@ -14,11 +14,9 @@ def get_client(quiet=False, debug=False):
 
     '''
     from .base import Client
-    from .map2model import main as map2model
 
     Client.quiet = quiet
     Client.debug = debug
-    Client.map2model = map2model
 
     # Initialize
     cli = Client()

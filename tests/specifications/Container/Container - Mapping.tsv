@@ -1,0 +1,121 @@
+Property	Expected Type	Description	Type	Type URL	BSC Description	Marginality	Cardinality	Controlled Vocabulary	Example
+additionalType	URL	An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.							
+alternateName	Text	An alias for the item.				Recommended	MANY		
+description	Text	A description of the item.			a linux container	Minimum	ONE		
+disambiguatingDescription	Text	A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.							
+identifier	PropertyValue or  Text or  URL	The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](http://schema.org/docs/datamodel.html#identifierBg) for more details.			Unique identifier for the container, typically corresponding to a uri to designate a registry source	Recommended	ONE		<username>/<repository>:<tag>@<hash>
+image	ImageObject or  URL	An image of the item. This can be a URL or a fully described ImageObject.							
+mainEntityOfPage	CreativeWork or  URL	Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See background notes for details. Inverse property: mainEntity.							
+name	Text	The name of the item.				Minimum	ONE		
+potentialAction	Action	Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.							
+sameAs	URL	URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.							
+subjectOf	CreativeWork or  Event	A CreativeWork or Event about this Thing.. Inverse property: about.							
+url	URL	URL of the item.			URL of the container, typically associated with a registry that shows the ContainerRecipe, vulnerability scans, and other metadata. This property can be used on a page listing many containers to indicate each individual container's page.	Minimum	ONE		
+Properties from SoftwareApplication									
+applicationCategory	Text	Type of software application, e.g. 'Game, Multimedia'.			Type of software e.g. database, tool, service. **Note:** Bioschemas have removed [URL](http://schema.org/URL) from the Expected Types.	Optional	MANY	Please indicate the container technology in all lowercase	{   "@type": ["SoftwareApplication", "Container"],   "applicationCategory": "singularity" }
+applicationSubCategory	Text	Subcategory of the application, e.g. 'Scientific Container'.							
+applicationSuite	Text	The name of the application suite to which the application belongs, if applicable (e.g. Excel belongs to Office).							
+availableOnDevice	Text	Device required to run the application. Used in cases where a specific make/model is required to run the application. Supersedes device.			Particular containers may require GPU on the host, for example.				
+countriesNotSupported	Text	Countries for which the application is not supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.							
+countriesSupported	Text	Countries for which the application is supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.							
+downloadUrl	URL	If the file can be downloaded, URL to download the binary. For containers without an exposed wget url or similar, this can be the pull command.				Optional	MANY		{   "@type": ["SoftwareApplication", "Tool"],   "downloadURL": "https://github.com/sacdallago/cellmap" }
+featureList	Text or  URL	Features or modules provided by this application (and possibly required by other applications).			Please choose values from [EDAM:Operation](http://edamontology.org/operation_0004).	Minimum	MANY	[EDAM:Operation](http://edamontology.org/operation_0004)	{   "@type": ["SoftwareApplication", "Tool"],   "featureList": ["http://edamontology.org/topic_0821", "http://edamontology.org/topic_0128"] }
+fileSize	Text	Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), MB will be assumed.							
+installUrl	URL	URL at which the app may be installed, if different from the URL of the item.							
+memoryRequirements	Text or  URL	Minimum memory requirements.							
+operatingSystem	Text	Operating systems supported (Windows 7, OSX 10.6, Android 1.6).			Operating systems on which the container runs, typically Linux derivatives and (for some containers) Windows.	Optional	MANY		{   "@type": ["SoftwareApplication", "Tool"],   "operatingSystem": ["Windows 7 or above", "Linux/Unix", "Mac/Apple"] }
+permissions	Text	Permission(s) required to run the app (for example, a Docker container may require ability to be root in some circumstances).							
+processorRequirements	Text	Processor architecture required to run the application (e.g. IA64).							
+releaseNotes	Text or  URL	Description of what changed in this version.							
+screenshot	ImageObject or  URL	A link to a screenshot image of the app.							
+softwareAddOn	SoftwareApplication	Additional content for a software application.							
+softwareHelp	CreativeWork	Software application help.			A documentation for the container, typically showing install steps, usage, and a changelog.	Optional	MANY		{   "@type": ["SoftwareApplication", "Tool"],   "softwareHelp": "https://biotools.readthedocs.io/en/latest/" }
+softwareRequirements	Text or  URL	Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (Examples: DirectX, Java or .NET runtime). Supersedes requirements.				Optional	MANY		{   "@type": ["SoftwareApplication", "Tool"],   "softwareRequirements": "JRE 8.0 or above" }
+softwareVersion	Text	Version of the software instance.			version of the container instance	Minimum	ONE		{   "@type": ["SoftwareApplication", "Tool"],   "softwareVersion": "1.0.2" }
+storageRequirements	Text or  URL	Storage requirements (free space required).							
+supportingData	DataFeed	Supporting data for a SoftwareApplication.							
+Properties from CreativeWork									
+about	Thing	The subject matter of the content.							
+accessMode	Text	The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Expected values include: auditory, tactile, textual, visual, colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual, textOnVisual.							
+accessModeSufficient	Text	A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Expected values include: auditory, tactile, textual, visual.							
+accessibilityAPI	Text	Indicates that the resource is compatible with the referenced accessibility API (WebSchemas wiki lists possible values).							
+accessibilityControl	Text	Identifies input methods that are sufficient to fully control the described resource (WebSchemas wiki lists possible values).							
+accessibilityFeature	Text	Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility (WebSchemas wiki lists possible values).							
+accessibilityHazard	Text	A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3 (WebSchemas wiki lists possible values).							
+accessibilitySummary	Text	A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."							
+accountablePerson	Person	Specifies the Person that is legally accountable for the CreativeWork.							
+aggregateRating	AggregateRating	The overall rating, based on a collection of reviews or ratings, of the item.							
+alternativeHeadline	Text	A secondary title of the CreativeWork.							
+associatedMedia	MediaObject	A media object that encodes this CreativeWork. This property is a synonym for encoding.							
+audience	Audience	An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.							
+audio	AudioObject	An embedded audio object.							
+author	Organization or  Person	The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.							
+award	Text	An award won by or for this item. Supersedes awards.							
+character	Person	Fictional person connected with a creative work.							
+citation	CreativeWork or  Text	A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.			Publication about this software.	Recommended	MANY		{ "@type": ["SoftwareApplication", "Tool"], "citation": "https://dx.doi.org/10.1016/S0022-2836(05)80360-2" }
+comment	Comment	Comments, typically from users.							
+commentCount	Integer	The number of comments this CreativeWork (e.g. Article, Question or Answer) has received. This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.							
+contentLocation	Place	The location depicted or described in the content. For example, the location in a photograph or painting.							
+contentRating	Text	Official rating of a piece of content—for example,'MPAA PG-13'.							
+contentReferenceTime	DateTime	The specific time described by a creative work, for works (e.g. articles, video objects etc.) that emphasise a particular moment within an Event.							
+contributor	Organization or  Person	A secondary contributor to the CreativeWork or Event.							
+copyrightHolder	Organization or  Person	The party holding the legal copyright to the CreativeWork.							
+copyrightYear	Number	The year during which the claimed copyright for the CreativeWork was first asserted.							
+creator	Organization or  Person	The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.							
+dateCreated	Date or  DateTime	The date on which the CreativeWork was created or the item was added to a DataFeed.				Optional	ONE		{ "@type": ["SoftwareApplication", "Tool"], "dateCreated": "2108-06-13" }
+dateModified	Date or  DateTime	The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.				Optional	ONE		{ "@type": ["SoftwareApplication", "Tool"], "dateModified": "2108-08-07" }
+datePublished	Date	Date of first broadcast/publication.							
+discussionUrl	URL	A link to the page containing the comments of the CreativeWork.							
+editor	Person	Specifies the Person who edited the CreativeWork.							
+educationalAlignment	AlignmentObject	An alignment to an established educational framework.							
+educationalUse	Text	The purpose of a work in the context of education; for example, 'assignment', 'group work'.							
+encoding	MediaObject	A media object that encodes this CreativeWork. This property is a synonym for associatedMedia. Supersedes encodings.							
+exampleOfWork	CreativeWork	A creative work that this work is an example/instance/realization/derivation of. Inverse property: workExample.							
+expires	Date	Date the content expires and is no longer useful or available. For example a VideoObject or NewsArticlewhose availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.							
+fileFormat	Text or  URL	Media type, typically MIME format (see IANA site) of the content e.g. application/zip of a SoftwareApplication binary. In cases where a CreativeWork has several media type representations, 'encoding' can be used to indicate each MediaObject alongside particular fileFormat information. Unregistered or niche file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.							
+funder	Organization or  Person	A person or organization that supports (sponsors) something through some kind of financial contribution.							
+genre	Text or  URL	Genre of the creative work, broadcast channel or group.							
+hasPart	CreativeWork	Indicates a CreativeWork that is (in some sense) a part of this CreativeWork. Inverse property: isPartOf.			Used to describe tools included into suites/bundles/workflows. 	Optional	MANY		
+headline	Text	Headline of the article.							
+inLanguage	Language or  Text	The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.							
+interactionStatistic	InteractionCounter	The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.							
+interactivityType	Text	The predominant mode of learning supported by the learning resource. Acceptable values are 'active', 'expositive', or 'mixed'.							
+isAccessibleForFree	Boolean	A flag to signal that the item, event, or place is accessible for free. Supersedes free.							
+isBasedOn	CreativeWork or  Product or  URL	A resource that was used in the creation of this resource. This term can be repeated for multiple sources. For example, http://example.com/great-multiplication-intro.html. Supersedes isBasedOnUrl.							
+isFamilyFriendly	Boolean	Indicates whether this content is family friendly.							
+isPartOf	CreativeWork	Indicates a CreativeWork that this CreativeWork is (in some sense) part of. Inverse property: hasPart.							
+keywords	Text	Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.				Optional	ONE	[EDAM:Topic](http://edamontology.org/topic_0003)	{ "@type": ["SoftwareApplication", "Tool"], "ketwords": "Biology, chemistry, medicine" }
+learningResourceType	Text	The predominant type or kind characterizing the learning resource. For example, 'presentation', 'handout'.							
+license	Text or URL	A license document that applies to this content, typically indicated by URL.			The applicable software license. **Note:** Bioschemas have changed the Expected Types to [URL](http://schema.org/URL) or [Text](http://schema.org/Text).	Recommended	MANY		{ "@type": ["SoftwareApplication", "Tool"], "license": "https://www.apache.org/licenses/LICENSE-2.0" }
+locationCreated	Place	The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork.							
+mainEntity	Thing	Indicates the primary entity described in some page or other CreativeWork. Inverse property: mainEntityOfPage.							
+material	Product or  Text or  URL	A material that something is made from, e.g. leather, wool, cotton, paper.							
+mentions	Thing	Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.							
+offers	Offer	An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.							
+position	Integer or  Text	The position of an item in a series or sequence of items.							
+producer	Organization or  Person	The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.).							
+provider	Organization or  Person	The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.							
+publication	PublicationEvent	A publication event associated with the item.							
+publisher	Organization or  Person	The publisher of the creative work.				Recommended	MANY		{   "@type": ["SoftwareApplication", "Tool"],   "publisher": {     "@type": "Organization",     "name": "National Center for Biotechnology Information National Library of Medicine",     "alternatName": "NCBI NLM"   } }
+publisherImprint	Organization	The publishing division which published the comic.							
+publishingPrinciples	CreativeWork or  URL	The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork. While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.							
+recordedAt	Event	The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event. Inverse property: recordedIn.							
+releasedEvent	PublicationEvent	The place and time the release was issued, expressed as a PublicationEvent.							
+review	Review	A review of the item. Supersedes reviews.							
+schemaVersion	Text or  URL	Indicates (by URL or string) a particular version of a schema used in some CreativeWork. For example, a document could declare a schemaVersion using an URL such as http://schema.org/version/2.0/ if precise indication of schema version was required by some application.							
+sourceOrganization	Organization	The Organization on whose behalf the creator was working.							
+spatialCoverage	Place	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content. It is a subproperty of contentLocation intended primarily for more technical and detailed materials. For example with a Dataset, it indicates areas that the dataset describes: a dataset of New York weather would have spatialCoverage which was the place: the state of New York. Supersedes spatial.							
+sponsor	Organization or  Person	A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.							
+temporalCoverage	DateTime or  Text or  URL	The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written "2011/2012"). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via "1939/1945". Supersedes datasetTimeInterval, temporal.							
+text	Text	The textual content of this CreativeWork.							
+thumbnailUrl	URL	A thumbnail image relevant to the Thing.							
+timeRequired	Duration	Approximate or typical time it takes to work with or through this learning resource for the typical intended target audience, e.g. 'P30M', 'P1H25M'.							
+translationOfWork	CreativeWork	The work that this work has been translated from. e.g. 物种起源 is a translationOf “On the Origin of Species” Inverse property: workTranslation.							
+translator	Organization or  Person	Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.							
+typicalAgeRange	Text	The typical expected age range, e.g. '7-9', '11-'.							
+version	Number or  Text	The version of the CreativeWork embodied by a specified resource.							
+video	VideoObject	An embedded video object.							
+workExample	CreativeWork	Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook. Inverse property: exampleOfWork.							
+workTranslation	CreativeWork	A work that is a translation of the content of this work. e.g. 西遊記 has an English workTranslation “Journey to the West”,a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese translation Tây du ký bình khảo. Inverse property: translationOfWork.							
+input	URL		external	http://semanticscience.org/resource/SIO_000230	The input format of the data. Must be one of the [EDAM:Data](http://edamontology.org/data_0006) concept labels or one of its synonyms. 	Recommended	MANY	[EDAM:Data](http://edamontology.org/data_0006)	{ "@type": ["SoftwareApplication", "Tool"], "input": ["http://edamontology.org/data_2977", "http://edamontology.org/data_2976"] }
+output	URL		external	http://semanticscience.org/resource/SIO_000229	The output format of the data. Must be one of the [EDAM:Data](http://edamontology.org/data_0006) concept labels or one of its synonyms.	Recommended	MANY	[EDAM:Data](http://edamontology.org/data_0006)	{ "@type": ["SoftwareApplication", "Tool"], "input": ["http://edamontology.org/data_1383", "http://edamontology.org/data_1384"] }

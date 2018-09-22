@@ -6,7 +6,7 @@ from openschemas.main.map2model.parser import FrontMatterParser
 import sys
 import os
 
-def main(config=None,
+def main(config_yml=None,
          folder=None,
          output=None,
          template=None,
@@ -35,7 +35,7 @@ def main(config=None,
     outfolder = os.path.abspath(outfolder)
     folder = os.path.abspath(folder)
 
-    config = config or 'configuration.yml'
+    config = config_yml or 'configuration.yml'
         
     # Output folder we may need to make
     if not os.path.exists(outfolder):
