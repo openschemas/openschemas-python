@@ -20,7 +20,7 @@ defaults: &defaults
 install: &install
     name: Install parallel gzip, gettext, python3, openbases, and jq
     command: |
-        apk add --no-cache pigz python3 gettext jq
+        apk add --no-cache pigz python3 gettext jq gcc
         wget https://bootstrap.pypa.io/get-pip.py
         python3 get-pip.py
         rm get-pip.py
