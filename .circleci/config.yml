@@ -72,10 +72,11 @@ schemabuilder: &schemabuilder
         docker run --name schema-builder --entrypoint /bin/bash -td "${SCHEMA_BUILDER}"
         echo "docker exec schema-builder openschemas --version"
         docker exec schema-builder openschemas --version
-        VERSION=$(docker exec schema-builder openschemas --version)
-        echo "docker tag ${SCHEMA_BUILDER}:latest ${SCHEMA_BUILDER}:${VERSION}"
-        docker tag "${SCHEMA_BUILDER}:latest" "${SCHEMA_BUILDER}:${VERSION}"
-        echo "export SCHEMA_BUILDER_VERSION=${VERSION}" >> ${BASH_ENV}
+        SCHEMA_BUILDER_VERSION=$(docker exec schema-builder openschemas --version)
+        echo "Found version ${SCHEMA_BUILDER_VERSION}
+        echo "docker tag ${SCHEMA_BUILDER}:latest ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
+        docker tag "${SCHEMA_BUILDER}:latest" "${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
+        echo "export SCHEMA_BUILDER_VERSION=${SCHEMA_BUILDER_VERSION}" >> ${BASH_ENV}
 
 # Docker
 dockerload: &dockerload
@@ -95,6 +96,7 @@ dockersave: &dockersave
     name: Docker Save
     no_output_timeout: 40m
     command: |
+        cat ${BASH_ENV}
         source ${BASH_ENV}
         echo "Saving ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} to container.tar.gz"
         mkdir -p /tmp/cache
@@ -105,10 +107,12 @@ dockerdeploy: &dockerdeploy
     name: Deploy to Docker Hub
     no_output_timeout: 40m
     command: |
+      cat ${BASH_ENV}
       source ${BASH_ENV}
       echo "Looking for ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
       if [[ -n "$DOCKER_PASS" ]]; then
             docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push ${SCHEMA_BUILDER}
             docker push ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}
             echo "Tagging latest image..."
             docker tag ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} ${SCHEMA_BUILDER}:latest

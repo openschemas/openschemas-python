@@ -1,5 +1,6 @@
 # OpenSchemas Python
 
+[![CircleCI](https://circleci.com/gh/openschemas/openschemas-python.svg?style=svg)](https://circleci.com/gh/openschemas/openschemas-python)
 [![PyPI version](https://badge.fury.io/py/openschemas.svg)](https://badge.fury.io/py/openschemas)
 
 ![https://github.com/openschemas/spec-template/raw/master/img/hexagon_square_small.png](https://github.com/openschemas/spec-template/raw/master/img/hexagon_square_small.png)
@@ -26,6 +27,12 @@ can be installed with pip:
 
 ```
 pip install openschemas
+
+# See the version
+openschemas --version
+
+# Run map2model
+map2model --config configuration.yml --folder specifications
 ```
 
 ## Usage
