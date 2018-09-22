@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     INSTALL_REQUIRES = get_requirements(lookup)
     ALL_REQUIRES = get_requirements(lookup, 'ALL_REQUIRES')
-    MAP2MODEL_REQUIRES = get_requrements(lookup, 'MAP2MODEL_REQUIRES')
+    MAP2MODEL_REQUIRES = get_requirements(lookup, 'MAP2MODEL_REQUIRES')
     TEST_REQUIRES = get_requirements(lookup, 'TEST_REQUIRES')
 
     setup(name=NAME,

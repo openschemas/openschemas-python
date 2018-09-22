@@ -2,7 +2,7 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-import .config as yml_manager
+from .config import YamlManager
 from .validator import FolderValidator
 import os
 
@@ -15,7 +15,7 @@ class FolderDigger:
     def __init__(self, config_file_path = None):
         self.specs_list = {}
         self.config_file_path = config_file_path or '%s/configuration.yml' %here
-        self.yml_config = yml_manager.YamlIO()
+        self.yml_config = YamlManager()
        
     def get_specs(self, spec_config, input_folder):
         specs_list = {}

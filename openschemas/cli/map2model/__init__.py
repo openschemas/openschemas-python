@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import openschemas.main.map2model.parser as md_parser
 import argparse
 import sys
 import os
@@ -34,7 +33,8 @@ def get_parser():
 def main():
     '''entrypoint for run.py script.
     '''
-
+    from openschemas.main.map2model import main
+    
     parser = get_parser()
     try:
         args = parser.parse_args()
@@ -42,39 +42,11 @@ def main():
         parser.print_help()
         sys.exit(0)
 
-    # Set the default specifications folder and configuration
-    folder = args.specs
-    if not folder:
-        folder = 'specifications'
-
-    # Inputs and outputs, defaults to docs/spec_files
-    outfolder = args.outfolder or 'docs/spec_files'
-    outfolder = os.path.abspath(outfolder)
-    folder = os.path.abspath(folder)
-
-    config = args.config or 'spec2model/configuration.yml'
-        
-    # Output folder we may need to make
-    if not os.path.exists(outfolder):
-        os.mkdir(outfolder)
-
-    print('Configuration file set to %s' % config)
-    print('Output folder set to %s' % outfolder)
-    print('Input folder set to %s\n' % folder)
-
-    # Both must exist
-    for path in [config, folder]:
-        if not os.path.exists(path):
-            print('Error, %s not found.' % path)
-            sys.exit(1)
-
-    spec_parser = md_parser.FrontMatterParser(input_folder=folder,
-                                              output_folder=outfolder,
-                                              config_file_path=config,
-                                              template=args.template,
-                                              repo=args.repo)
-    spec_parser.parse_front_matter()
-    
+    spec_parser = main(folder=args.specs,
+                       output=args.outfolder,
+                       config=args.config,
+                       template=args.template,
+                       repo=args.repo)
 
 if __name__ == '__main__':
     main()

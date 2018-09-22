@@ -16,4 +16,5 @@ Critical items to know are:
 versions here coincide with releases on pypi.
 
 ## [master](https://github.com/openschemas/openschemas-python/tree/master)
+ - adding map2model module and executable console script here (0.0.1)
  - package registration (still under development) (0.0.0)

@@ -2,14 +2,15 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-import .parser as md_parser
+from openschemas.main.map2model.parser import FrontMatterParser
 import sys
 import os
 
 def main(config=None,
          folder=None,
-         outfolder=None,
-         ):
+         output=None,
+         template=None,
+         repo=None):
     '''entrypoint function for map2model, when used by the openschemas client.
 
        Parameters
@@ -17,8 +18,12 @@ def main(config=None,
        config: The configuration.yml. If not defined, defaults to that in PWD.
        folder: the input folder where specification subfolders are expected. 
        If not defined, defaults to "specifications"
-       outfolder: the output folder for specification files. If not defined, 
+       output: the output folder for specification files. If not defined, 
        defaults to "spec files"
+       template: the template to use for the specification. Defaults to
+       "template.html" provided by the module
+       repo: the repository where the specification will be published.
+       defaults to openschemas/specifications
     '''
 
     # Set the default specifications folder and configuration
@@ -26,7 +31,7 @@ def main(config=None,
         folder = 'specifications'
 
     # Inputs and outputs, defaults to docs/spec_files
-    outfolder = outfolder or 'spec_files'
+    outfolder = output or 'spec_files'
     outfolder = os.path.abspath(outfolder)
     folder = os.path.abspath(folder)
 
@@ -46,10 +51,10 @@ def main(config=None,
             print('Error, %s not found.' % path)
             sys.exit(1)
 
-    spec_parser = md_parser.FrontMatterParser(input_folder=folder,
-                                              output_folder=outfolder,
-                                              config_file_path=config,
-                                              template=args.template,
-                                              repo=args.repo)
+    spec_parser = FrontMatterParser(input_folder=folder,
+                                    output_folder=outfolder,
+                                    config_file_path=config,
+                                    template=template,
+                                    repo=repo)
     spec_parser.parse_front_matter()
     return spec_parser

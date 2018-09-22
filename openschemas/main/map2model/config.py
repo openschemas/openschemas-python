@@ -4,7 +4,7 @@
 
 from ruamel.yaml import YAML
 
-class YamlIO:
+class YamlManager:
     yml_path=''
     yaml= ''
 
