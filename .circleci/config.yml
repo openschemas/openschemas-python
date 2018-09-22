@@ -49,7 +49,7 @@ schemaenv: &schemaenv
         fi
         if [ ! -n "${CIRCLE_PR_REPONAME}" ]; then
             REPO_NAME=openschemas/openschemas-python
-        else:
+        else
             REPO_NAME=${CIRCLE_PR_USERNAME}/${CIRCLE_PR_REPONAME}
         fi
         echo "Open Bases OpenSchema builder is ${SCHEMA_BUILDER}"
