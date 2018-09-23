@@ -3,7 +3,6 @@
 #    https://www.github.com/openschemas/openschemas-python
 
 from openschemas.utils.managers import YamlManager
-from .mapping import load_tsv
 import os
 import sys
 
@@ -127,7 +126,7 @@ class SpecValidator:
         return result
 
 
-    def validate_headers(self):
+    def validate_headers(self, content):
         '''Ensure that headers for specific files only conform to those
            required and expected 
         '''
@@ -135,7 +134,6 @@ class SpecValidator:
         for key, path in paths.items():
 
             # This is a list of lists, the first list is the header row
-            content = load_tsv(path)
             found = content[0]
 
             # Default headers expected, including capitalization
@@ -178,15 +176,6 @@ class SpecDefaults:
     def get_paths(self):
         return self.paths
 
-    def load_name(self, name):
-        '''load a tsv based on its name, the key in the self.paths lookup
-        
-        Parameters
-        ==========
-        name: the file key to load.
-        '''
-        if name in self.paths:
-            return load_tsv(self.paths[name])
 
     def set_paths(self, folder=None):
         '''define expected set of file (fullpath) from names lookup with
