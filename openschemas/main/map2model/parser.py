@@ -245,7 +245,7 @@ class FrontMatterParser:
         if not output_name.endswith('.html'):
             output_name = "%s.html" % output_name
 
-        md_fm_bytes = BytesIO()ggg
+        md_fm_bytes = BytesIO()
         frontmatter.dump(data, md_fm_bytes)
         content =  str(md_fm_bytes.getvalue(), 'utf-8')
 
