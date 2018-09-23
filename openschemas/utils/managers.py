@@ -123,7 +123,7 @@ class YamlManager:
             output_file = "%s.%s" % (output_file, ext)
 
         with open(output_file, mode) as outfile:
-            self.yaml.dump(content, output_file, default_flow_style=False)
+            self.yaml.dump(content, outfile)
 
     def save_yaml(self, output_file, content=None, mode = 'w'):
         return self.save_yml(output_file, content, mode, ext='yaml')
