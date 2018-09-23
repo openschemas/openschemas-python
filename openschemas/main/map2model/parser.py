@@ -227,42 +227,64 @@ class FrontMatterParser:
             readme.write("- [GitHUb Issues](%s)\n" % spec_dict['gh_tasks'])
             readme.write("> These files were generated using [map2model](https://github.com/openschemas/map2model) Python Module.")
         
+
+    def save_html_template(self, output_name, template_file=None):
+        '''save an html template, meaning a jekyll template with 
+           {{OPENSCHEMAS_FRONTEND_MATTER}} to replace with front matter.
+           If a template isn't defined, the default provided by the package
+           is used
+
+           Parameters
+           ==========
+           template_file: the jekyll template to use, provided if not defined
+           output_name: the name for the output file, should end in .html
+        '''
+        if template_file is None:
+            template_file = '%s/templates/template.html' % here
+
+        if not output_name.endswith('.html'):
+            output_name = "%s.html" % output_name
+
+        md_fm_bytes = BytesIO()
+        frontmatter.dump(post, md_fm_bytes)
+        content =  str(md_fm_bytes.getvalue(), 'utf-8')
+
+        # Read in the template, do replace
+        with open(template_file, 'r') as tfile:
+            template = tfile.read()
+        template = template.replace('{{OPENSCHEMAS_FRONTEND_MATTER}}', content)
+
+        # Write to file
+        with open(output_name, 'w') as outfile:
+            outfile.write(template)
+        return output_name
+    
+
     def parse_front_matter(self):
         '''the primary function to parse the provided front matter, the tsv
            files, and generate yml specifications from the templates
         '''
- 
+        
         # Dictionary of the entries in configuration.yml with folder name as index
         self.specs_list = self.file_manager.get_specification_list(self.input_folder)
         all_specs = self._get_specs_list()
 
         for spec_name, spec_dict in all_specs.items():
 
-            # Create frontmatter post object with basic metadata
+            # Prepare frontmatter post object with basic metadata
             post = self._get_specification_post(spec_dict)
-
-            md_fm_bytes = BytesIO()
             post.metadata['version'] = str(post.metadata['version'])
-            frontmatter.dump(post, md_fm_bytes)
             spec_name = post.metadata['name']
-            content =  str(md_fm_bytes.getvalue(), 'utf-8')
 
             # Create folder structure (examples) and README.md
             spec_dir = self._create_spec_folder_struct(spec_name)
             self._write_README(spec_dir, spec_dict)
-            
-            # Write the final markdown frontmatter to <NAME>.html from template.html            
-            with open('%s/templates/template.html' % here, 'r') as tfile:
-                template = tfile.read()
-            template = template.replace('{{MAP2SPEC_FRONTEND_MATTER}}', content)
 
             # Write as output a yml and html file
             output_name =  os.path.join(spec_dir, '%s' % spec_name)
-            with open('%s.yml' % output_name, 'w') as outfile:
-                outfile.write(content)
-            with open('%s.html' % output_name, 'w') as outfile:
-                outfile.write(template)
+            self.save_html_template(output_name)
+            self.file_manager.yml_config.save_yml(output_name, post.metadata)
 
-            print('%s MarkDown file generated.' % post.metadata['name'])
+            print('%s MarkDown file generated.' % spec_name)
 
         print('Generation Process Complete. Output files are in %s' % self.md_files_path)
