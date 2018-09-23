@@ -35,7 +35,7 @@ class SpecValidator:
            ==========
            infile: the input file to load
         '''
-        if self.validate_infile(infile)
+        if self.validate_infile(infile):
             self.name = os.bath.basename(self.infile)
             self.folder = os.path.dirname(self.infile)
             self.defaults = SpecDefaults(self.name, self.folder)
@@ -104,8 +104,6 @@ class SpecValidator:
            infile: if provided, load new infile (to share a validator instance)
            criteria: a criteria.yml file to validate from. If not provided,
            we use the template.
-
-['description', 'edit_url', 'gh_folder', 'gh_tasks', 'hierarchy', 'mapping', 'name', 'parent_type', 'spec_info', 'spec_type', 'status', 'subtitle', 'use_cases_url', 'version']
 
         '''
         if infile is not None:
