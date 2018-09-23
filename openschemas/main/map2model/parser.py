@@ -228,7 +228,7 @@ class FrontMatterParser:
             readme.write("> These files were generated using [map2model](https://github.com/openschemas/map2model) Python Module.")
         
 
-    def save_html_template(self, output_name, template_file=None):
+    def save_html_template(self, data, output_name, template_file=None):
         '''save an html template, meaning a jekyll template with 
            {{OPENSCHEMAS_FRONTEND_MATTER}} to replace with front matter.
            If a template isn't defined, the default provided by the package
@@ -246,7 +246,7 @@ class FrontMatterParser:
             output_name = "%s.html" % output_name
 
         md_fm_bytes = BytesIO()
-        frontmatter.dump(post, md_fm_bytes)
+        frontmatter.dump(data, md_fm_bytes)
         content =  str(md_fm_bytes.getvalue(), 'utf-8')
 
         # Read in the template, do replace
@@ -282,7 +282,7 @@ class FrontMatterParser:
 
             # Write as output a yml and html file
             output_name =  os.path.join(spec_dir, '%s' % spec_name)
-            self.save_html_template(output_name)
+            self.save_html_template(data, output_name)
             self.file_manager.yml_config.save_yml(output_name, post.metadata)
 
             print('%s MarkDown file generated.' % spec_name)
