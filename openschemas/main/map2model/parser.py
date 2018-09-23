@@ -245,7 +245,7 @@ class FrontMatterParser:
         if not output_name.endswith('.html'):
             output_name = "%s.html" % output_name
 
-        md_fm_bytes = BytesIO()
+        md_fm_bytes = BytesIO()ggg
         frontmatter.dump(data, md_fm_bytes)
         content =  str(md_fm_bytes.getvalue(), 'utf-8')
 
@@ -282,7 +282,7 @@ class FrontMatterParser:
 
             # Write as output a yml and html file
             output_name =  os.path.join(spec_dir, '%s' % spec_name)
-            self.save_html_template(data, output_name)
+            self.save_html_template(post, output_name)
             self.file_manager.yml_config.save_yml(output_name, post.metadata)
 
             print('%s MarkDown file generated.' % spec_name)
