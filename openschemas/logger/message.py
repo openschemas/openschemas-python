@@ -37,6 +37,7 @@ class OpenSchemasMessage:
         self.colors = {ABORT: DARKRED,
                        CRITICAL: RED,
                        ERROR: RED,    
+                       TEST: YELLOW,
                        WARNING: YELLOW,  
                        LOG: PURPLE,      
                        CUSTOM: PURPLE,       

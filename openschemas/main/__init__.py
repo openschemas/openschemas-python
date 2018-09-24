@@ -14,11 +14,12 @@ def get_client(quiet=False, debug=False):
 
     '''
     from openschemas.main.base import Client
-    from openschemas.main.validate import SpecValidator
+    from openschemas.main.validate import ( SpecValidator, BasicValidator )
 
     Client.quiet = quiet
     Client.debug = debug
-    Client.validator = SpecValidator
+    Client.SpecValidator = SpecValidator
+    Client.BasicValidator = BasicValidator
 
     # Initialize
     cli = Client()

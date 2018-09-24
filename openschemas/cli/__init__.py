@@ -24,6 +24,10 @@ def get_parser():
     validate = subparsers.add_parser("validate",
                                       help="validate a specification")
 
+    validate.add_argument("--basic", dest='basic', 
+                         help='use the basic validator, without extra checks and loading', 
+                         default=False, action="store_true")
+
     validate.add_argument('--criteria', nargs='?',
                            help="define custom entry criteria (critera.yml)", 
                            default=None, type=str)

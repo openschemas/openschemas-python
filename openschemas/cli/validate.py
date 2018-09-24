@@ -7,5 +7,8 @@ import sys
 def main(args):
 
     from openschemas.main import Client
-    validator = Client.validator(infile=args.infile)
+    if args.basic is True:
+        validator = Client.BasicValidator(infile=args.infile)
+    else:
+        validator = Client.SpecValidator(infile=args.infile)
     validator.validate_criteria(criteria=args.criteria)
