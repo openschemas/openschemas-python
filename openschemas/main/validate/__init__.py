@@ -149,7 +149,7 @@ class SpecValidator:
             print(' test:result ------->' % lookup[result])
             print(' test:level -------->' % level)
             print('[group:%s] ---- <end>' % group)
-            bot.message()
+
 
 # Validation
 
