@@ -9,7 +9,10 @@ import sys
 class SpecValidator:
     '''the spec validator can "sniff" a file based on extension, and validate
        the file based on the extension, or have one of the specific type 
-       validators (html, yaml) called directly.
+       validators (html, yaml) called directly. There are two steps.
+
+       Step 0. validates the file itself. Does it exist? Load without error?
+       Step 1. validates the file against a criteria.yml, default is provided
     '''
 
     def __str__(self):
@@ -18,9 +21,10 @@ class SpecValidator:
     def __repr__(self):
         return self.__str__()
 
-    def __init__(self, infile):
+    def __init__(self, infile, critera=None):
 
         self.load(infile)
+        self.load_criteria(criteria)
 
 # Loading
 
@@ -34,37 +38,95 @@ class SpecValidator:
            ==========
            infile: the input file to load
         '''
-        if self.validate_infile(infile):
+        # Step 0. of validation checks exist and load of file
+        self.infile = self.validate_exists(infile)
+        if self.infile is not None:
+
+            # If the fie exists, we can store metadata about it
             self.name = os.bath.basename(self.infile)
             self.folder = os.path.dirname(self.infile)
             self.defaults = SpecDefaults(self.name, self.folder)
-            self.spec = YamlManager(self.infile)
-            print('%s loaded successfully, see "spec" attribute' % infile)
-            return self.spec.load()
+
+            # We only return a manager if the file loads cleanly.
+            self.spec =  self.validate_loads(infile) # returns YamlManager
+            if self.spec is not None:
+                return self.spec.load()
 
 
-    def validate_infile(self, infile):
-        '''determine filename of infile 
-           based on Specification Name (and extension). If the extension
-           doesn't end in yml/yaml or html, it's not valid (and note
-           we will need to add support for reading json)
+    def load_criteria(self, criteria=None):
+        '''load a criteria.yml file. If not specified, load (or reload)
+           default provided by package.
 
            Parameters
            ==========
-           name: the name of the specification
+           criteria: a yml specification for criteria. If not provided, use
+           default at criteria/specification.yml. If you need help creating
+           a new criteria (that might be added to defaults) please open an issue
         '''
-        extensions = ['yaml', 'yml', 'html']
+        # First pass - criteria file defined, and exists
+        if criteria is not None:
+            if os.path.exists(criteria):
+                criteria = self.validate_exists(criteria)
+            
+        # Second pass, use default provided by library
+        default_criteria = '%s/criteria/specification.yml' % here
+        if criteria is None:
+            criteria = default_criteria
+
+        # Attempt to load (and validate) the criteria (returns YamlManager)
+        self.criteria = self.validate_loads(criteria)
+
+        # Again fall back to default if error loading user-provided
+        if self.criteria is None:
+            self.criteria = self.validate_loads(default_criteria)
+
+        return self.criteria.load()
+
+
+    def validate_exists(self, infile, extensions=None):
+        '''determine filename of infile 
+           based on Specification Name (and extension). If the extension
+           doesn't end in yml/yaml or html, it's not valid (and note
+           we will need to add support for reading json). If valid,
+           return the filename. If not, return None.
+
+           Parameters
+           ==========
+           name: the name of the specification / yaml file
+           extensions: a list of valid extensions
+        '''
+        if extensions == None:
+            extensions = ['yaml', 'yml', 'html']
+
+        if not isinstance(extensions, (list,tuple)):
+            extensions = [extensions]
+
         for ext in extensions:
             if infile.endswith(ext) and os.path.exists(name):
                 print('Found %s, valid name' % infile)
-                self.infile = os.path.abspath(infile)
-                return True
+                return os.path.abspath(infile)
 
         # Tell the user doesn't have valid, show which are
         valids = ','.join(extensions)
         print('%s does not have a valid extension (%s)' % (infile, valids))
-        return False
 
+    def validate_loads(self, infile):
+        '''determine if a file can load without error. If yes, return manager.
+           If not, return None.
+           
+           Parameters
+           ==========
+           infile: the input file to attempt loading with the YamlManager,
+           can be yaml or front end matter in html.
+        '''
+        manager = YamlManager(infile)
+        try:
+            manager.load()
+            return manager
+        except:
+            bot.warning('Load of %s not successfully, using default' % infile)
+     
+   
 # Getting
 
     def _check_spec(self):
@@ -111,6 +173,7 @@ class SpecValidator:
         # If we have/had a loaded spec, this is True
         if self._check_spec():
 
+            # Step 1.
             results = [self.validate_keys(infile),
                        self.validate_paths()]
 
