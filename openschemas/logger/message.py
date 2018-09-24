@@ -14,6 +14,7 @@ LOG = -1
 INFO = 1
 CUSTOM = 1
 QUIET = 0
+TEST = 2
 VERBOSE = VERBOSE1 = 2
 VERBOSE2 = 3
 VERBOSE3 = 4
@@ -239,6 +240,9 @@ class OpenSchemasMessage:
     def info(self, message):
         self.emit(INFO, message)
 
+    def test(self, message):
+        self.emit(TEST, message, "TEST")
+
     def newline(self):
         return self.info("")
 
@@ -306,6 +310,7 @@ def get_logging_level(level=None):
               'WARNING': WARNING,
               'LOG': LOG,
               'INFO': INFO,
+              'TEST': TEST,
               'QUIET': QUIET,
               'DEBUG': DEBUG}
 

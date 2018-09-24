@@ -24,12 +24,11 @@ class SpecValidator:
     def __repr__(self):
         return self.__str__()
 
-    def __init__(self, infile, criteria=None):
+    def __init__(self, infile):
 
         from openschemas.main.base import RobotNamer
 
         self.load(infile)
-        self.criteria = criteria
         self.robot = RobotNamer()
 
 # Loading
@@ -93,7 +92,7 @@ class SpecValidator:
 
 # Criteria
 
-    def validate_criteria(self, infile=None, criteria=None):
+    def validate_criteria(self, criteria, infile=None):
         '''validate an infile (or already loaded one) against criteria.
 
            Parameters
@@ -121,14 +120,15 @@ class SpecValidator:
             bot.error('criteria is missing "checks" section, exiting.')
 
         # Default missing function
-        missing_function = 'openschemas.main.validate.criteria.missing_function'
+        missing_function = 'openschemas.main.validate.criteria.base.missing'
 
         # Turn status into meaningful message for user
         lookup = {True: 'pass', False: 'fail', None: 'null'}         
 
         # Loop through checks, run against specification file
         for group, checks in criteria['checks'].items():
-            print('[group:%s] ---- <start>' % group)
+
+            print('[group:%s] ----- <start' % group)
             values = dict()
             [values.update(dict(check)) for check in checks]
             
@@ -142,20 +142,22 @@ class SpecValidator:
             function_name = function
             function = load_module(function)
 
-            if not kwargs:
+            if kwargs is None:
                 result = function(infile)
             else:
-                result = function(infile, **kwargs)
+                values = dict()
+                [values.update(dict(kwarg)) for kwarg in kwargs]
+                result = function(infile, **values)
+
+            print('[check:%s]' % name)
+            print(' test:function %s' % function_name)
+            print(' test:result %s' % lookup[result])
+            print(' test:level %s' % level)
 
             # The logger will exit with -1 if error or below
             bot.named(level, function_name)
 
-            print('[check:%s]' % name)
-            print(' test:function %s -->' % function_name)
-            print(' test:result ------->' % lookup[result])
-            print(' test:level -------->' % level)
-            print('[group:%s] ---- <end>' % group)
-
+            print('[group:%s] ----- end>' % group)
 
 # Validation
 
