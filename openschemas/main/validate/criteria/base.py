@@ -29,6 +29,7 @@ def dummy(spec, passing=True):
        Parameters
        ==========
        spec: the input spec, in json format (dict)
+       passing: boolean to return True or False (default is True)
     '''
     msg = "not True"
     if passing:
