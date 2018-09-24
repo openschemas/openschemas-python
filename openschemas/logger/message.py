@@ -297,30 +297,26 @@ def get_logging_level(level=None):
         level = os.environ.get("MESSAGELEVEL", "1") # INFO
     level = level.upper()
 
-    if level == "CRITICAL":
-        return CRITICAL
-    elif level == "ABORT":
-        return ABORT
-    elif level == "ERROR":
-        return ERROR
-    elif level == "WARNING":
-        return WARNING
-    elif level == "LOG":
-        return LOG
-    elif level == "INFO":
-        return INFO
-    elif level == "QUIET":
-        return QUIET
-    elif level.startswith("VERBOSE"):
+    if level.startswith("VERBOSE"):
         return VERBOSE3
-    elif level == "LOG":
-        return LOG
-    elif level == "DEBUG":
-        return DEBUG
-    else:
-        level = int(level)
 
-    return level
+    levels = {'CRITICAL': CRITICAL,
+              'ABORT': ABORT,
+              'ERROR': ERROR,
+              'WARNING': WARNING,
+              'LOG': LOG,
+              'INFO': INFO,
+              'QUIET': QUIET,
+              'DEBUG': DEBUG}
+
+    # Get a logging level (int) if it's in the lookup
+    logging_level = levels.get(level)
+
+    # Otherwise, return custom level for user
+    if logging_level is None:
+        logging_level = int(level)
+
+    return logging_level
 
 
 def get_user_color_preference():
