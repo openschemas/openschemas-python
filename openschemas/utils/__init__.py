@@ -1,4 +1,5 @@
 from .fileio import ( 
+    load_module,
     mkdir_p, 
     write_file, 
     write_json,

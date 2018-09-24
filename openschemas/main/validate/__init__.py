@@ -3,6 +3,9 @@
 #    https://www.github.com/openschemas/openschemas-python
 
 from openschemas.utils.managers import YamlManager
+from openschemas.main.base import RobotNamer
+from openschemas.logger import bot
+from openschemas.utils import load_module
 import os
 import sys
 
@@ -25,6 +28,7 @@ class SpecValidator:
 
         self.load(infile)
         self.load_criteria(criteria)
+        self.robot = RobotNamer()
 
 # Loading
 
@@ -80,8 +84,74 @@ class SpecValidator:
         if self.criteria is None:
             self.criteria = self.validate_loads(default_criteria)
 
+        bot.info('[criteria:%s]' % self.criteria.yml_path)
         return self.criteria.load()
 
+# Criteria
+
+    def validate_criteria(self, infile=None, criteria=None):
+        '''validate an infile (or already loaded one) against criteria.
+
+           Parameters
+           ==========
+           infile: an input specification file
+           criteria: a loaded (json/dict) or criteria, or html/yml file
+        '''   
+        # Read in the criteria - any errors will fall back to default
+        if not isinstance(criteria, dict):
+            criteria = self.load_criteria(criteria)
+
+        # Also need an input file, load
+        if infile is None:
+            if not self.infile:
+                bot.error('Please provide an infile to function, or load()')
+            infile = self.infile
+
+        # Same for infile, user can provide already loaded
+        if not isinstance(infile, dict):
+            infile = self.load(infile)
+
+        if "checks" not in criteria:
+            bot.error('criteria is missing "checks" section, exiting.')
+
+        # Default missing function
+        missing_function = 'openschemas.main.validate.criteria.missing_function'
+
+        # Turn status into meaningful message for user
+        lookup = {True: 'pass', False: 'fail', None: 'null'}         
+
+        # Loop through checks, run against specification file
+        for group, checks in criteria['checks'].items():
+            print('[group:%s] ---- <start>' % group)
+            values = dict()
+            [values.update(dict(check)) for check in checks]
+            
+            # Obtain values, the only required is the function
+            name = values.get('name', robot.generate())  
+            level = values.get('level', 'warning').upper()
+            function = values.get('function', missing_function)
+            kwargs = values.get('kwargs')
+
+            # If we have a function provided in the configuration yaml
+            function_name = function
+            function = load_module(function)
+
+            if not kwargs:
+                result = function(infile)
+            else:
+                result = function(infile, **kwargs)
+
+            # The logger will exit with -1 if error or below
+            bot.named(level, function_name)
+
+            print('[check:%s]' % name)
+            print(' test:function %s -->' % function_name)
+            print(' test:result ------->' % lookup[result])
+            print(' test:level -------->' % level)
+            print('[group:%s] ---- <end>' % group)
+            bot.message()
+
+# Validation
 
     def validate_exists(self, infile, extensions=None):
         '''determine filename of infile 

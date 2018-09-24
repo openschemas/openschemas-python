@@ -207,6 +207,12 @@ class OpenSchemasMessage:
 
     # Logging ------------------------------------------
 
+    def named(self, level, message, return_code=-1):
+        '''exits if -3 or lower (error or below)'''
+        level_int = get_logging_level(level)
+        self.emit(level_int, message, level.upper())
+        if level_int <= -3:
+            sys.exit(return_code)
 
     def abort(self, message):
         self.emit(ABORT, message, 'ABORT')
@@ -281,13 +287,15 @@ class OpenSchemasMessage:
         
 
 
-def get_logging_level():
+def get_logging_level(level=None):
     '''configure a logging to standard out based on the user's
     selected level, which should be in an environment variable called
     MESSAGELEVEL. if MESSAGELEVEL is not set, the info level
     (1) is assumed (all informational messages).
     '''
-    level = os.environ.get("MESSAGELEVEL", "1") # INFO
+    if level is None:
+        level = os.environ.get("MESSAGELEVEL", "1") # INFO
+    level = level.upper()
 
     if level == "CRITICAL":
         return CRITICAL

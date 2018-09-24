@@ -171,6 +171,17 @@ def read_yaml(filename, mode='r', quiet=False):
 # environment / options
 ################################################################################
 
+def load_module(module_str):
+    '''load a module based on a string name.
+
+       Parameters
+       ==========
+       module_str: complete python path to module (and function)
+    '''
+    module, function = module_str.rsplit('.', 1)
+    module = __import__(module)
+    return getattr(module, function)
+
 def convert2boolean(arg):
     '''convert2boolean is used for environmental variables
     that must be returned as boolean'''
