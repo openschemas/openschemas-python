@@ -35,7 +35,7 @@ def dummy(spec, passing=True):
     if passing:
         msg = "True"
 
-    messages = ['Roses are red, violets are blue, here is a, it is %s' % msg,
+    messages = ['Roses are red, violets are blue, here is a test, it is %s' % msg,
                 "If I were a rich man, well then I wouldn't be a dinosaur.",
                 "Sweet dreams are made of cheese, who am I to diss a brie?"]
 
