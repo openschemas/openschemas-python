@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.map2model.parser &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../main.html">openschemas.main</a> &raquo;</li>
+        
+          <li><a href="../map2model.html">openschemas.main.map2model</a> &raquo;</li>
+        
+      <li>openschemas.main.map2model.parser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.map2model.parser</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2018, Vanessa Sochat All rights reserved.</span>
+<span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="kn">from</span> <span class="nn">.file_manager</span> <span class="k">import</span> <span class="n">FolderDigger</span>
+<span class="kn">from</span> <span class="nn">.mapping</span> <span class="k">import</span> <span class="n">MappingParser</span>
+<span class="kn">from</span> <span class="nn">.validator</span> <span class="k">import</span> <span class="n">FolderValidator</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">frontmatter</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+
+<span class="n">here</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<div class="viewcode-block" id="FrontMatterParser"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.parser.FrontMatterParser">[docs]</a><span class="k">class</span> <span class="nc">FrontMatterParser</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;the FrontEndMatterParser takes an input folder of specification</span>
+<span class="sd">       subfolders, and a configuration.yml file, and generates a set of</span>
+<span class="sd">       specification folders, each with a &lt;Specification&gt;.html file that</span>
+<span class="sd">       can be contributed as a specification to the openschemas.github.io</span>
+<span class="sd">       repository.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_folder</span><span class="o">=</span><span class="s1">&#39;specifications&#39;</span><span class="p">,</span> 
+                       <span class="n">output_folder</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">config_file_path</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">template</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="n">repo</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&#39;&#39;&#39;defaults here are intended for running in spec2map repository. </span>
+<span class="sd">           Use via run.py to edit for your needs.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           input_folder: a folder of specification subfolders, each with .tsv</span>
+<span class="sd">           output_folder: base to write matching output subfolders</span>
+<span class="sd">           config_file_path: path to configuration.yml</span>
+<span class="sd">           template.html is the template for openschemas.github.io</span>
+<span class="sd">           repo: github &lt;org&gt;/&lt;repository&gt; for specifications </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">config_file_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">config_file_path</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/configuration.yml&#39;</span> <span class="o">%</span> <span class="n">here</span>
+
+        <span class="k">if</span> <span class="n">template</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/templates/template.html&#39;</span> <span class="o">%</span> <span class="n">here</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input_folder</span><span class="p">(</span><span class="n">input_folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_input_folder</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md_files_path</span> <span class="o">=</span> <span class="n">output_folder</span> <span class="ow">or</span> <span class="s1">&#39;docs/spec_files/&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_manager</span> <span class="o">=</span> <span class="n">FolderDigger</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">MappingParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parse_repo</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_parse_repo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repo</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;parse an &lt;ORG&gt;/&lt;REPO&gt; into the full Github name, along with the</span>
+<span class="sd">           username and reponame, and github pages. This should be for where</span>
+<span class="sd">           the specification is to be published.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           repo: should correspond to the &lt;ORG&gt;/&lt;REPONAME&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">repo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">repo</span> <span class="o">=</span> <span class="s1">&#39;openschemas/specifications&#39;</span>
+
+        <span class="n">username</span><span class="p">,</span> <span class="n">reponame</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repo</span> <span class="o">=</span> <span class="s2">&quot;https://www.github.com/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reponame</span> <span class="o">=</span> <span class="n">reponame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ghpages</span> <span class="o">=</span> <span class="s2">&quot;https://</span><span class="si">%s</span><span class="s2">.github.io/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_input_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;check for the existence of the input folder, ensure full path,</span>
+<span class="sd">           and return if exists. Exit if doesn&#39;t!</span>
+<span class="sd">           </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           input_folder: path (relative or full) to input folder with specification</span>
+<span class="sd">           subdirectories.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cannot find </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">folder</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found folder </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">folder</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">folder</span>        
+
+    <span class="k">def</span> <span class="nf">_get_specs_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;return listing of specs, meaning loaded workbooks. The workbooks should</span>
+<span class="sd">           already be validated by the file manager, and so we don&#39;t do it here.</span>
+<span class="sd">           Each entry in the specs_list is a dictionary that includes paths to:</span>
+<span class="sd">           mapping_file, bioschemas_file, specification_file, and authors_file.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">all_specs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">specs_list</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">set_metadata</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+            <span class="n">all_specs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">get_mapping</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">all_specs</span>
+
+    <span class="k">def</span> <span class="nf">_get_specification_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                                <span class="n">spec_dict</span><span class="p">,</span> 
+                                <span class="n">skip_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">info_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">info_key</span><span class="o">=</span><span class="s1">&#39;spec_info&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;from a spec_dict, derive the post material, a dictionary that</span>
+<span class="sd">           will be converted to yaml.</span>
+<span class="sd"> </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           spec_dict: a dictionary with:</span>
+<span class="sd">               name: the name of the folder (and Specification)</span>
+<span class="sd">               workbook: the loaded workbook (or file to it)</span>
+<span class="sd">               params: the original values in the configuration.yml for the folder</span>
+<span class="sd">           skip_fields: don&#39;t include subset of fields (list)</span>
+<span class="sd">           info_fields: fields to add to &quot;spec_info&quot; (info_key)</span>
+<span class="sd">           info_key: key to use for info_fields into metadata</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">frontmatter</span><span class="o">.</span><span class="n">Post</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">version_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;version_date&#39;</span><span class="p">:</span> <span class="n">version_date</span><span class="p">}</span>
+
+        <span class="c1"># Skip over set of pre-defined fields</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_fields</span><span class="p">:</span>
+            <span class="n">skip_fields</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">info_fields</span><span class="p">:</span>
+            <span class="n">info_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;full_example&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;offical_type&#39;</span>
+                           <span class="s1">&#39;subtitle&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;version&#39;</span><span class="p">,</span>
+                           <span class="s2">&quot;version_date&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Fields specifically for openschemas template</span>
+        <span class="n">info</span><span class="p">[</span><span class="s1">&#39;full_example&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/tree/master/</span><span class="si">%s</span><span class="s2">/examples/&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repo</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">skip_fields</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">skip_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">skip_fields</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">spec_field</span> <span class="ow">in</span> <span class="n">spec_dict</span><span class="p">:</span>
+
+            <span class="c1"># Info gets added to the metadata at the end under info_key</span>
+            <span class="k">if</span> <span class="n">spec_field</span> <span class="ow">in</span> <span class="n">info_fields</span><span class="p">:</span>
+                <span class="n">info</span><span class="p">[</span><span class="n">spec_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="n">spec_field</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">spec_field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip_fields</span><span class="p">:</span>
+                <span class="n">metadata</span><span class="p">[</span><span class="n">spec_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="n">spec_field</span><span class="p">]</span>
+
+        <span class="n">metadata</span><span class="p">[</span><span class="n">info_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+        <span class="k">return</span> <span class="n">post</span>
+
+    <span class="k">def</span> <span class="nf">_create_spec_folder_struct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec_name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;create a spec folder and subdirectory for examples for a &#39;spec_name&#39;</span>
+<span class="sd">           only if it doesn&#39;t exist.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           spec_name: the name of the specification</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Individual specification folder under &quot;docs/spec_files&quot;</span>
+        <span class="n">spec_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">md_files_path</span><span class="p">,</span> <span class="n">spec_name</span><span class="p">)</span>
+
+        <span class="c1"># Create if doesn&#39;t exist</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">spec_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spec_dir</span><span class="p">)</span>
+
+        <span class="c1"># Equivalent for &quot;examples&quot; subfolder</span>
+        <span class="n">spec_exp_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spec_dir</span><span class="p">,</span> <span class="s1">&#39;examples&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">spec_exp_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spec_exp_dir</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spec_exp_dir</span><span class="p">,</span> <span class="s2">&quot;README.md&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">example_file</span><span class="p">:</span>
+                <span class="n">example_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2"> coding examples. </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spec_name</span><span class="p">)</span>
+                <span class="n">example_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Folder that stores JSON-LD, RDFa or microdata examples.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> file structure created.&quot;</span> <span class="o">%</span> <span class="n">spec_name</span><span class="p">)</span>
+
+        <span class="c1"># Either way, return the specification directory</span>
+        <span class="k">return</span> <span class="n">spec_dir</span>
+
+    <span class="k">def</span> <span class="nf">_write_README</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md_folder</span><span class="p">,</span> <span class="n">spec_dict</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;write a README for a particular spec_md_folder</span>
+<span class="sd"> </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           md_folder: a folder where a specification README should be written</span>
+<span class="sd">           spec_dict: a dictionary with:</span>
+<span class="sd">               name: the name of the folder (and Specification)</span>
+<span class="sd">               workbook: the loaded workbook (or file to it)</span>
+<span class="sd">               params: the original values in the configuration.yml for the folder</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">md_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">md_folder</span><span class="p">,</span> <span class="s1">&#39;README.md&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">md_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">readme</span><span class="p">:</span>
+ 
+            <span class="c1"># Look up some fields</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+            <span class="n">spec_type</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;spec_type&#39;</span><span class="p">]</span>
+            <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;hierarchy&#39;</span><span class="p">]</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> 
+            <span class="n">subtitle</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;subtitle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;## </span><span class="si">%s</span><span class="s2"> specification v. </span><span class="si">%s</span><span class="s2"> </span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">))</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;**</span><span class="si">%s</span><span class="s2">** </span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spec_type</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i_pos</span><span class="p">,</span> <span class="n">step_hier</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">)):</span>
+                <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">step_hier</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">i_pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &gt; &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">spec_type</span> <span class="o">==</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span>
+                <span class="n">readme_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; &gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">**</span><span class="si">%s</span><span class="s2">** </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">subtitle</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># Description </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">description</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Links </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;- [Specification](</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">/)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ghpages</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;- [Specification source](</span><span class="si">%s</span><span class="s2">.html)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;- [Coding Examples](</span><span class="si">%s</span><span class="s2">/tree/master/examples)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;gh_folder&#39;</span><span class="p">])</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;- [GitHUb Issues](</span><span class="si">%s</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s1">&#39;gh_tasks&#39;</span><span class="p">])</span>
+            <span class="n">readme</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&gt; These files were generated using [map2model](https://github.com/openschemas/map2model) Python Module.&quot;</span><span class="p">)</span>
+        
+
+<div class="viewcode-block" id="FrontMatterParser.save_html_template"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.parser.FrontMatterParser.save_html_template">[docs]</a>    <span class="k">def</span> <span class="nf">save_html_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">output_name</span><span class="p">,</span> <span class="n">template_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;save an html template, meaning a jekyll template with </span>
+<span class="sd">           {{OPENSCHEMAS_FRONTEND_MATTER}} to replace with front matter.</span>
+<span class="sd">           If a template isn&#39;t defined, the default provided by the package</span>
+<span class="sd">           is used</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           template_file: the jekyll template to use, provided if not defined</span>
+<span class="sd">           output_name: the name for the output file, should end in .html</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">template_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">template_file</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/templates/template.html&#39;</span> <span class="o">%</span> <span class="n">here</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">output_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">):</span>
+            <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.html&quot;</span> <span class="o">%</span> <span class="n">output_name</span>
+
+        <span class="n">md_fm_bytes</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">frontmatter</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">md_fm_bytes</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span>  <span class="nb">str</span><span class="p">(</span><span class="n">md_fm_bytes</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Read in the template, do replace</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tfile</span><span class="p">:</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">tfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{{OPENSCHEMAS_FRONTEND_MATTER}}&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="c1"># Write to file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output_name</span></div>
+    
+
+<div class="viewcode-block" id="FrontMatterParser.parse_front_matter"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.parser.FrontMatterParser.parse_front_matter">[docs]</a>    <span class="k">def</span> <span class="nf">parse_front_matter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;the primary function to parse the provided front matter, the tsv</span>
+<span class="sd">           files, and generate yml specifications from the templates</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1"># Dictionary of the entries in configuration.yml with folder name as index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">specs_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_manager</span><span class="o">.</span><span class="n">get_specification_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_folder</span><span class="p">)</span>
+        <span class="n">all_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_specs_list</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">spec_name</span><span class="p">,</span> <span class="n">spec_dict</span> <span class="ow">in</span> <span class="n">all_specs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="c1"># Prepare frontmatter post object with basic metadata</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_specification_post</span><span class="p">(</span><span class="n">spec_dict</span><span class="p">)</span>
+            <span class="n">post</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">])</span>
+            <span class="n">spec_name</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Create folder structure (examples) and README.md</span>
+            <span class="n">spec_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_spec_folder_struct</span><span class="p">(</span><span class="n">spec_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_README</span><span class="p">(</span><span class="n">spec_dir</span><span class="p">,</span> <span class="n">spec_dict</span><span class="p">)</span>
+
+            <span class="c1"># Write as output a yml and html file</span>
+            <span class="n">output_name</span> <span class="o">=</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spec_dir</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">spec_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_html_template</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_manager</span><span class="o">.</span><span class="n">yml_config</span><span class="o">.</span><span class="n">save_yml</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> MarkDown file generated.&#39;</span> <span class="o">%</span> <span class="n">spec_name</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generation Process Complete. Output files are in </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">md_files_path</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

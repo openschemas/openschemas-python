@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.map2model.mapping &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../main.html">openschemas.main</a> &raquo;</li>
+        
+          <li><a href="../map2model.html">openschemas.main.map2model</a> &raquo;</li>
+        
+      <li>openschemas.main.map2model.mapping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.map2model.mapping</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2018, Vanessa Sochat All rights reserved.</span>
+<span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="kn">from</span> <span class="nn">rdflib</span> <span class="k">import</span> <span class="n">ConjunctiveGraph</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Loading Functions</span>
+
+<div class="viewcode-block" id="load_tsv"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.load_tsv">[docs]</a><span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;load a tsv file using the csv default provided reader!</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       filename: the file name to load, will return list (rows) of</span>
+<span class="sd">       lists (columns)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tsv</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">tsv</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rows</span></div>
+
+
+<span class="c1"># RDF Functions</span>
+
+<span class="k">def</span> <span class="nf">__get_class_name</span><span class="p">(</span><span class="n">temp_uri</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">temp_uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;http://schema.org/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">__add_property</span><span class="p">(</span><span class="n">props_dic</span><span class="p">,</span> <span class="n">prop_desc</span><span class="p">):</span>
+    <span class="n">sdo_uri</span><span class="o">=</span><span class="s2">&quot;http://schema.org/&quot;</span>
+    <span class="k">if</span> <span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">props_dic</span><span class="p">:</span>
+        <span class="n">t_prop_name</span> <span class="o">=</span> <span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]</span>
+        <span class="n">props_dic</span><span class="p">[</span><span class="n">t_prop_name</span><span class="p">][</span><span class="s1">&#39;exp_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;exp_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sdo_uri</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">props_dic</span><span class="p">[</span><span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]]</span><span class="o">=</span><span class="n">prop_desc</span>
+        <span class="n">props_dic</span><span class="p">[</span><span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]][</span><span class="s1">&#39;exp_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">prop_desc</span><span class="p">[</span><span class="s1">&#39;exp_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sdo_uri</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">props_dic</span>
+
+
+<span class="k">def</span> <span class="nf">__get_class_props</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quering properties of </span><span class="si">%s</span><span class="s2"> in Schema.org&quot;</span> <span class="o">%</span> <span class="n">class_name</span><span class="p">)</span>
+
+    <span class="n">qres</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;prefix schema: &lt;http://schema.org/&gt;</span>
+<span class="s2">                        select distinct * where {</span>
+<span class="s2">                            ?property schema:domainIncludes  schema:</span><span class="si">%s</span><span class="s2"> .</span>
+<span class="s2">                            ?property schema:rangeIncludes  ?exp_type .</span>
+<span class="s2">                            ?property rdfs:label ?prop_name.</span>
+<span class="s2">                            ?property rdfs:comment ?description</span>
+<span class="s2">                        }&quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">class_name</span><span class="p">)</span>
+    <span class="n">temp_dic</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">qres</span><span class="p">:</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">labels_dic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">labels_dic</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">label</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&lt;a href=</span><span class="se">\&quot;</span><span class="s1">/docs/&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;a href=</span><span class="se">\&quot;</span><span class="s1">http://schema.org/docs/&#39;</span><span class="p">)</span>
+        <span class="n">temp_dic</span><span class="o">=</span><span class="n">__add_property</span><span class="p">(</span><span class="n">temp_dic</span><span class="p">,</span> <span class="n">labels_dic</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">temp_dic</span>
+
+
+<span class="k">def</span> <span class="nf">__get_parent_type</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Find parent type of </span><span class="si">%s</span><span class="s2"> in Schema.org&quot;</span> <span class="o">%</span> <span class="n">class_name</span><span class="p">)</span>
+
+    <span class="n">qres</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;prefix schema: &lt;http://schema.org/&gt;</span>
+<span class="s2">                          select ?supclass where{</span>
+<span class="s2">                          ?class rdfs:label ?label .</span>
+<span class="s2">                          ?class rdfs:subClassOf ?supclass .</span>
+<span class="s2">                          filter (?label=&#39;</span><span class="si">%s</span><span class="s2">&#39;)</span>
+<span class="s2">                        }&quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">class_name</span><span class="p">)</span>
+    <span class="n">resp_arr</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">qres</span><span class="p">:</span>
+        <span class="n">resp_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;supclass&#39;</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">resp_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;http://schema.org/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_properties</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">properties</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">class_name</span> <span class="o">==</span> <span class="s1">&#39;Thing&#39;</span><span class="p">:</span>
+        <span class="n">properties</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">__get_class_props</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">properties</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">temp_props</span> <span class="o">=</span> <span class="n">__get_class_props</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">)</span>
+        <span class="n">properties</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_props</span>
+        <span class="n">parent_type</span> <span class="o">=</span> <span class="n">__get_parent_type</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">graph</span><span class="p">)</span>
+        <span class="n">_get_properties</span><span class="p">(</span><span class="n">parent_type</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_properties_in_hierarchy"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_properties_in_hierarchy">[docs]</a><span class="k">def</span> <span class="nf">get_properties_in_hierarchy</span><span class="p">(</span><span class="n">type_name</span><span class="p">):</span>
+    <span class="n">query_type</span> <span class="o">=</span> <span class="n">type_name</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">ConjunctiveGraph</span><span class="p">()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://schema.org/version/latest/schema.jsonld&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;json-ld&#39;</span><span class="p">)</span>
+    <span class="n">props_dic</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">_get_properties</span><span class="p">(</span><span class="n">query_type</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">props_dic</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">props_dic</span></div>
+
+
+<div class="viewcode-block" id="get_hierarchy"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_hierarchy">[docs]</a><span class="k">def</span> <span class="nf">get_hierarchy</span><span class="p">(</span><span class="n">props_dic</span><span class="p">):</span>
+    <span class="n">type_hierarchy</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">h_type</span> <span class="ow">in</span> <span class="n">props_dic</span><span class="p">:</span>
+        <span class="n">type_hierarchy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">type_hierarchy</span></div>
+
+
+<div class="viewcode-block" id="get_expected_types"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_expected_types">[docs]</a><span class="k">def</span> <span class="nf">get_expected_types</span><span class="p">(</span><span class="n">expected_types</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function that receives an string with expected types</span>
+<span class="sd">       and generates an array with each expected type</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Get rid of newlines anywhere</span>
+    <span class="n">expected_types</span> <span class="o">=</span> <span class="n">expected_types</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+    <span class="c1"># Get rid of OR in any casing, anywhere with space either side</span>
+    <span class="n">expected_types</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; (o|O)(r|R) &#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span>
+
+    <span class="c1"># Split based on space OR comma</span>
+    <span class="n">expected_types</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; |,&#39;</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span>
+
+    <span class="c1"># Keep a separate final list of cleaned types</span>
+    <span class="n">list_of_types</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">expected_type</span> <span class="ow">in</span> <span class="n">expected_types</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expected_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="n">list_of_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expected_type</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">list_of_types</span></div>
+
+<div class="viewcode-block" id="get_row_value"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_row_value">[docs]</a><span class="k">def</span> <span class="nf">get_row_value</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;get a value from a list based on a field name that is expected to </span>
+<span class="sd">       appear in headers. This allows for change in the ordering of fields</span>
+<span class="sd">       as long as the header is correctly labeled. The default value of</span>
+<span class="sd">       an empty string is returned, and we clean by stripping spaces and</span>
+<span class="sd">       newlines.</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       field: the field to look up</span>
+<span class="sd">       row: the row (list) of values</span>
+<span class="sd">       headers: the list of field names (header of the tsv file) to match field</span>
+<span class="sd">       default: the default value to return, if not found</span>
+<span class="sd">       clean: boolean to indicate wanting to strip newlines and spaces</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">default</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">headers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">break</span>
+    
+    <span class="k">if</span> <span class="n">clean</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="get_dict_from_row"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_dict_from_row">[docs]</a><span class="k">def</span> <span class="nf">get_dict_from_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;a row is typically a list of values, assigned to another list of headers.</span>
+<span class="sd">       this function parses a known set of headers and enters them into</span>
+<span class="sd">       the expected values for bioschemas attributes. We return a dict.</span>
+<span class="sd"> </span>
+<span class="sd">       Properties</span>
+<span class="sd">       ==========</span>
+<span class="sd">       row: the row (list) of values from the bioschemas tsv file</span>
+<span class="sd">       headers: the headers that are expected (already validated)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">props</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Set Bioschemas attributes</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;bsc_description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;BSC Description&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;cardinality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Cardinality&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;controlled_vocab&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Controlled Vocabulary&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Description&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;example&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Example&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;marginality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Marginality&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Property&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Type&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;type_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Type URL&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+
+    <span class="c1"># Expected types list, cleaned up</span>
+    <span class="n">expected_types</span> <span class="o">=</span> <span class="n">get_row_value</span><span class="p">(</span><span class="s1">&#39;Expected Type&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="n">props</span><span class="p">[</span><span class="s1">&#39;expected_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_expected_types</span><span class="p">(</span><span class="n">expected_types</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">props</span></div>
+
+
+<div class="viewcode-block" id="get_property_in_hierarchy"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_property_in_hierarchy">[docs]</a><span class="k">def</span> <span class="nf">get_property_in_hierarchy</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">,</span> <span class="n">mapping_property</span><span class="p">,</span> <span class="n">prop_type</span><span class="o">=</span><span class="s2">&quot;new_sdo&quot;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;if a mapping property (indexed by its name, which is key &quot;property&quot;)</span>
+<span class="sd">       if found as a key in sdo_props at a particular entity (e.g., Thing)</span>
+<span class="sd">       then we&#39;ve found it in the sdo, and grab it&#39;s description for use from</span>
+<span class="sd">       the sdo. If we don&#39;t find it, we return the type as a &quot;new_sdo&quot;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">sdo_props</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mapping_property</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">entity</span><span class="p">]:</span>
+            <span class="n">prop_type</span> <span class="o">=</span> <span class="n">entity</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">mapping_property</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">]</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">entity</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+            <span class="n">mapping_property</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">prop_type</span><span class="p">,</span> 
+            <span class="s1">&#39;property&#39;</span><span class="p">:</span> <span class="n">mapping_property</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_formatted_props"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_formatted_props">[docs]</a><span class="k">def</span> <span class="nf">get_formatted_props</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">,</span> 
+                        <span class="n">mapping_props</span><span class="p">,</span>
+                        <span class="n">spec_name</span><span class="p">,</span> 
+                        <span class="n">spec_type</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function combines the parsed mapping properties (importantly, </span>
+<span class="sd">       mapping_props needs to &quot;parent&quot; field added) with the properties</span>
+<span class="sd">       from the standard ontology</span>
+<span class="sd"> </span>
+<span class="sd">       ::Note: this function needs testing for a type</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       sdo_props: standard ontology (shared) properties</span>
+<span class="sd">       mapping_props: result from get_mapping_properties (bioschemas_file)</span>
+<span class="sd">       spec_name: the name of the specification (specification_file)</span>
+<span class="sd">       spec_type: the type of the specification (specification_file)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">all_props</span><span class="o">=</span> <span class="p">[]</span>
+    <span class="n">bsc_props</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># if &quot;Type&quot; only get new properties from mapping file</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">spec_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;type&quot;</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">mapping_property</span> <span class="ow">in</span> <span class="n">mapping_props</span><span class="p">:</span>
+
+            <span class="n">bsc_props</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapping_property</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">])</span>
+            <span class="n">temp_prop</span> <span class="o">=</span> <span class="n">get_property_in_hierarchy</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">,</span> <span class="n">mapping_property</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;new_sdo&quot;</span><span class="p">:</span>
+                <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_name</span>
+            <span class="n">all_props</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">sdo_prop</span> <span class="ow">in</span> <span class="n">sdo_props</span><span class="p">:</span>
+
+            <span class="c1"># now get all props from schema &amp; make them such that _layout can use them</span>
+            <span class="k">for</span> <span class="n">sdo_prop_prop</span> <span class="ow">in</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bsc_props</span><span class="p">:</span>
+                    <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdo_prop</span>
+                    <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;property&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]</span>
+                    <span class="c1"># sdo_props[sdo_prop][sdo_prop_prop][&#39;bsc_dec&#39;] = sdo_props[sdo_prop][sdo_prop_prop][&#39;description&#39;]</span>
+                    <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+                    <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;expected_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;exp_type&#39;</span><span class="p">]</span>
+                    <span class="n">all_props</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_props</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">sdo_props</span><span class="p">[</span><span class="n">sdo_prop</span><span class="p">][</span><span class="n">sdo_prop_prop</span><span class="p">][</span><span class="s1">&#39;prop_name&#39;</span><span class="p">]:</span>
+                            <span class="n">i</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdo_prop</span>
+        
+    <span class="c1"># if profile</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mapping_prop</span> <span class="ow">in</span> <span class="n">mapping_props</span><span class="p">:</span>
+            <span class="n">temp_prop</span> <span class="o">=</span> <span class="n">get_property_in_hierarchy</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">,</span> <span class="n">mapping_prop</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;new_sdo&quot;</span><span class="p">:</span>
+                <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+            <span class="n">all_props</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_prop</span><span class="p">[</span><span class="s1">&#39;property&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">all_props</span></div>
+
+
+<div class="viewcode-block" id="get_mapping_properties"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.get_mapping_properties">[docs]</a><span class="k">def</span> <span class="nf">get_mapping_properties</span><span class="p">(</span><span class="n">bioschemas_file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;get_mapping_properties</span>
+<span class="sd">       use the bioschemas field file and the specification type to</span>
+<span class="sd">       return a list of type properties. The bioschemas file </span>
+<span class="sd">       should already be validated for correct headers.</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       bioschemas_file: the &lt;Template&gt; - Bioschemas.tsv file</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">bioschemas_file</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">type_properties</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+        
+        <span class="c1"># If we want to do checks for empty cells, do it here</span>
+
+        <span class="c1"># If Expected Type, Marginality, and Cardinaity isn&#39;t empty </span>
+        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">rows</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">rows</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">property_dict</span> <span class="o">=</span> <span class="n">get_dict_from_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+            <span class="n">type_properties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">property_dict</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">type_properties</span></div>
+
+
+<div class="viewcode-block" id="MappingParser"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.MappingParser">[docs]</a><span class="k">class</span> <span class="nc">MappingParser</span><span class="p">:</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">metadata</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+
+<div class="viewcode-block" id="MappingParser.set_metadata"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.MappingParser.set_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">set_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span></div>
+
+
+<div class="viewcode-block" id="MappingParser.check_url"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.MappingParser.check_url">[docs]</a>    <span class="k">def</span> <span class="nf">check_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec_url</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;check_url doesn&#39;t exit if the address isn&#39;t found, etc.</span>
+<span class="sd">           it just adds the string &quot;err_404&quot; as metadata given these cases.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">spec_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s2">&quot;err_404&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spec_url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;err_404&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">spec_url</span></div>
+
+<div class="viewcode-block" id="MappingParser.get_description"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.MappingParser.get_description">[docs]</a>    <span class="k">def</span> <span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">spec_file</span><span class="p">:</span>
+            <span class="n">spec_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;specification_file&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Read in both, these are already validated</span>
+        <span class="n">spec_sheet</span> <span class="o">=</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">spec_file</span><span class="p">)</span>
+
+        <span class="c1"># Generate values in advance</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">gh_base</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/openschemas/specifications/tree/master&#39;</span>
+        <span class="n">use_cases_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;use_cases_url&#39;</span><span class="p">]</span>
+
+        <span class="n">description</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;spec_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;spec_type&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Github Future Links</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;gh_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gh_base</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;gh_tasks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/openschemas/specifications/labels/type%3A%20&#39;</span><span class="o">+</span> <span class="n">name</span>
+
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;edit_url&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/specification.html&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gh_base</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;use_cases_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_url</span><span class="p">(</span><span class="n">use_cases_url</span><span class="p">)</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;parent_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;parent_type&#39;</span><span class="p">,</span> <span class="s1">&#39;Thing&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Parse specification file</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;subtitle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_sheet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spec_sheet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">description</span></div>
+
+<div class="viewcode-block" id="MappingParser.get_mapping"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.mapping.MappingParser.get_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">get_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec_sheet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                          <span class="n">bioschemas_sheet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;get a mapping, meanng the full properties given a specification sheet</span>
+<span class="sd">           and a bioschemas sheet. If files aren&#39;t provided, the defaults defined</span>
+<span class="sd">           at self.defaults.paths are used.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           spec_sheet: the sheet with basic information (description, name, etc.)</span>
+<span class="sd">           bioschemas_sheet: sheet (tsv) with bioschemas fields</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Parsing </span><span class="si">%s</span><span class="s2"> =========&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Pull out description, name, type</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_description</span><span class="p">(</span><span class="n">spec_sheet</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">spec_type</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;spec_type&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">bioschemas_sheet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">bioschemas_sheet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;bioschemas_file&#39;</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ptype</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;parent_type&#39;</span><span class="p">]</span>
+            <span class="n">sdo_props</span> <span class="o">=</span> <span class="n">get_properties_in_hierarchy</span><span class="p">(</span><span class="n">ptype</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error finding parent </span><span class="si">%s</span><span class="s1">! Is </span><span class="si">%s</span><span class="s1"> a valid entity?&#39;</span> <span class="o">%</span><span class="n">ptype</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;hierarchy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_hierarchy</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">)</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;hierarchy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">print_hierarchy</span> <span class="o">=</span> <span class="s1">&#39; &gt; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;hierarchy&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prepared schema.org properties for hierarchy </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">print_hierarchy</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Classifing </span><span class="si">%s</span><span class="s2"> properties&quot;</span> <span class="o">%</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="n">mapping_props</span> <span class="o">=</span> <span class="n">get_mapping_properties</span><span class="p">(</span><span class="n">bioschemas_sheet</span><span class="p">)</span>
+
+        <span class="c1"># Combine new specification with standard ontology to get final mapping</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_formatted_props</span><span class="p">(</span><span class="n">sdo_props</span><span class="p">,</span>
+                                                     <span class="n">mapping_props</span><span class="p">,</span>
+                                                     <span class="n">spec_name</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span>
+                                                     <span class="n">spec_type</span> <span class="o">=</span> <span class="n">spec_type</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">description</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

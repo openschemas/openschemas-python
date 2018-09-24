@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.validate &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../main.html">openschemas.main</a> &raquo;</li>
+        
+      <li>openschemas.main.validate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.validate</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2018, Vanessa Sochat All rights reserved.</span>
+<span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="kn">from</span> <span class="nn">openschemas.logger</span> <span class="k">import</span> <span class="n">bot</span>
+<span class="kn">from</span> <span class="nn">openschemas.main.validate.helpers</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">validate_loads</span><span class="p">,</span>
+    <span class="n">validate_criteria</span><span class="p">,</span>
+    <span class="n">load_criteria</span>
+<span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">here</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1"># Validator Classes ############################################################</span>
+<span class="c1">################################################################################</span>
+
+<div class="viewcode-block" id="BasicValidator"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.BasicValidator">[docs]</a><span class="k">class</span> <span class="nc">BasicValidator</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;the basic validator doesn&#39;t care about the input file extensions,</span>
+<span class="sd">       and gives the user more freedom to write custom validators using it. </span>
+<span class="sd">       We only validate that the file exists.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">default_criteria</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/criteria/dummy.yml&#39;</span> <span class="o">%</span> <span class="n">here</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[basic-validator:</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+
+        <span class="kn">from</span> <span class="nn">openschemas.main.base</span> <span class="k">import</span> <span class="n">RobotNamer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">RobotNamer</span><span class="p">()</span>
+
+<span class="c1"># Loading</span>
+
+<div class="viewcode-block" id="BasicValidator.load"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.BasicValidator.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;load an input file, meaning checking for the file&#39;s existence.</span>
+<span class="sd">           It&#39;s up to the user (if desired) to load the file in their </span>
+<span class="sd">           validation functions, or write a custom _load() function.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           infile: the input file to load</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Step 0. of validation checks exist and load of file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_exists</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># If the fie exists, we can store metadata about it</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input file provided under attribute &quot;infile&quot;&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># Validation</span>
+
+<div class="viewcode-block" id="BasicValidator.validate_exists"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.BasicValidator.validate_exists">[docs]</a>    <span class="k">def</span> <span class="nf">validate_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;determine filename of infile, validate that exists. </span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           infile: the name of the specification / yaml file</span>
+<span class="sd">           extensions: a list of valid extensions</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">infile</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found </span><span class="si">%s</span><span class="s1">, valid name&#39;</span> <span class="o">%</span> <span class="n">infile</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span></div></div>
+
+     
+
+<div class="viewcode-block" id="SpecValidator"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.SpecValidator">[docs]</a><span class="k">class</span> <span class="nc">SpecValidator</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;the spec validator can &quot;sniff&quot; a file based on extension, and validate</span>
+<span class="sd">       the file based on the extension, or have one of the specific type </span>
+<span class="sd">       validators (html, yaml) called directly. There are two steps.</span>
+
+<span class="sd">       Step 0. validates the file itself. Does it exist? Load without error?</span>
+<span class="sd">       Step 1. validates the file against a criteria.yml, default is provided</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">default_criteria</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/criteria/specification.yml&#39;</span> <span class="o">%</span> <span class="n">here</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[spec-validator:</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+
+        <span class="kn">from</span> <span class="nn">openschemas.main.base</span> <span class="k">import</span> <span class="n">RobotNamer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">RobotNamer</span><span class="p">()</span>
+
+<span class="c1"># Loading</span>
+
+<div class="viewcode-block" id="SpecValidator.load"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.SpecValidator.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;load an input file, meaning checking for the file&#39;s existence,</span>
+<span class="sd">           that it has a default extension, and loading it into the &quot;spec&quot;</span>
+<span class="sd">           via the YamlManager (that can handle frontmatter in a html or</span>
+<span class="sd">           standard yml/yaml</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           infile: the input file to load</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Step 0. of validation checks exist and load of file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_exists</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">infile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># If the fie exists, we can store metadata about it</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">infile</span><span class="p">)</span>
+
+            <span class="c1"># We only return a manager if the file loads cleanly.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spec</span> <span class="o">=</span>  <span class="n">validate_loads</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="c1"># returns YamlManager</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">load</span><span class="p">()</span></div>
+
+<span class="c1"># Validation</span>
+
+<div class="viewcode-block" id="SpecValidator.validate_exists"><a class="viewcode-back" href="../../../openschemas.main.validate.html#openschemas.main.base.SpecValidator.validate_exists">[docs]</a>    <span class="k">def</span> <span class="nf">validate_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infile</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;determine filename of infile </span>
+<span class="sd">           based on Specification Name (and extension). If the extension</span>
+<span class="sd">           doesn&#39;t end in yml/yaml or html, it&#39;s not valid (and note</span>
+<span class="sd">           we will need to add support for reading json). If valid,</span>
+<span class="sd">           return the filename. If not, return None.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           infile: the name of the specification / yaml file</span>
+<span class="sd">           extensions: a list of valid extensions</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">extensions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;yml&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">extensions</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">extensions</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">infile</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">infile</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found </span><span class="si">%s</span><span class="s1">, valid name&#39;</span> <span class="o">%</span> <span class="n">infile</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+
+        <span class="c1"># Tell the user doesn&#39;t have valid, show which are</span>
+        <span class="n">valids</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extensions</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> does not have a valid extension (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">valids</span><span class="p">))</span></div></div>
+
+
+<span class="n">BasicValidator</span><span class="o">.</span><span class="n">load_criteria</span> <span class="o">=</span> <span class="n">load_criteria</span>
+<span class="n">BasicValidator</span><span class="o">.</span><span class="n">validate_criteria</span> <span class="o">=</span> <span class="n">validate_criteria</span>
+
+<span class="n">SpecValidator</span><span class="o">.</span><span class="n">load_criteria</span> <span class="o">=</span> <span class="n">load_criteria</span>
+<span class="n">SpecValidator</span><span class="o">.</span><span class="n">validate_criteria</span> <span class="o">=</span> <span class="n">validate_criteria</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

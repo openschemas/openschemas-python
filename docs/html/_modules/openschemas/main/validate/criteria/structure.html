@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.validate.criteria.structure &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../../main.html">openschemas.main</a> &raquo;</li>
+        
+          <li><a href="../../validate.html">openschemas.main.validate</a> &raquo;</li>
+        
+      <li>openschemas.main.validate.criteria.structure</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.validate.criteria.structure</h1><div class="highlight"><pre>
+<span></span><span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="c1"># These are validation functions referenced in the default (and other)</span>
+<span class="c1"># For all of the below, &quot;spec&quot; refers to a loaded dictionary (or derivative)</span>
+<span class="c1"># of a specification</span>
+<span class="c1"># criteria.yml files (e.g., specification.yml)</span>
+
+<span class="kn">from</span> <span class="nn">openschemas.logger</span> <span class="k">import</span> <span class="n">bot</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<div class="viewcode-block" id="optional"><a class="viewcode-back" href="../../../../../openschemas.main.validate.criteria.html#openschemas.main.validate.criteria.structure.optional">[docs]</a><span class="k">def</span> <span class="nf">optional</span><span class="p">(</span><span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;optional_structure looks for a schema having optional fields, and</span>
+<span class="sd">       issues a warning if doesn&#39;t exist. To implement this in a criteria.yml:</span>
+
+<span class="sd">        checks:</span>
+<span class="sd">            global:</span>
+<span class="sd">              - name: Check for optional global sections and metadata</span>
+<span class="sd">              - level: warning</span>
+<span class="sd">              - function: openschemas.main.validate.criteria.structure.optional</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+
+    <span class="n">optional_fields</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;gh_folder&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">optional_fields</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="required"><a class="viewcode-back" href="../../../../../openschemas.main.validate.criteria.html#openschemas.main.validate.criteria.structure.required">[docs]</a><span class="k">def</span> <span class="nf">required</span><span class="p">(</span><span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;required_structure looks for a schema&#39;s required fields, and issues</span>
+<span class="sd">       an exit if doesn&#39;t exist. To implement this in a criteria.yml:</span>
+
+<span class="sd">        checks:</span>
+<span class="sd">            global:</span>
+<span class="sd">              - name: Check for required global sections and metadata</span>
+<span class="sd">              - level: error</span>
+<span class="sd">              - function: openschemas.main.validate.criteria.structure.required</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+  
+    <span class="c1"># (key, type, url, required)</span>
+    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;edit_url&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;gh_tasks&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;hierarchy&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;mapping&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;parent_type&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;spec_info&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;spec_type&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;use_cases_url&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">required_fields</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="spec_info"><a class="viewcode-back" href="../../../../../openschemas.main.validate.criteria.html#openschemas.main.validate.criteria.structure.spec_info">[docs]</a><span class="k">def</span> <span class="nf">spec_info</span><span class="p">(</span><span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;test that the spec_info has all the required subfields</span>
+
+<span class="sd">        spec_info:</span>
+<span class="sd">          - name: Check that spec_info has all required subfields</span>
+<span class="sd">          - level: error</span>
+<span class="sd">          - function: openschemas.main.validate.criteria.structure.spec_info</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="s2">&quot;spec_info&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;&quot;spec_info&quot; key is missing from specification upper level!&#39;</span><span class="p">)</span>
+
+    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;full_example&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;version_date&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)]</span>
+
+    <span class="n">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">required_fields</span><span class="p">)</span>
+
+    <span class="c1"># Test format of version date</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[0-9]</span><span class="si">{8}</span><span class="s1">T[0-9]</span><span class="si">{6}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;spec_info&#39;</span><span class="p">][</span><span class="s1">&#39;version_date&#39;</span><span class="p">]):</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;spec_info &gt; version_date is malformed: &quot;YYYYMMDDTHHMMSS&quot;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="semvar"><a class="viewcode-back" href="../../../../../openschemas.main.validate.criteria.html#openschemas.main.validate.criteria.structure.semvar">[docs]</a><span class="k">def</span> <span class="nf">semvar</span><span class="p">(</span><span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;check that the specification uses semantic versioning</span>
+
+<span class="sd">       semvar:</span>
+<span class="sd">         - name: Check that the version strings use semantic versioning (x.x.x)</span>
+<span class="sd">         - level: error</span>
+<span class="sd">         - function: openschemas.main.validate.criteria.structure.semvar</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="s2">&quot;version&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;&quot;version&quot; key is missing from specification upper level!&#39;</span><span class="p">)</span>
+
+    <span class="c1"># We don&#39;t check for &quot;spec_info&quot; because this test comes after required</span>
+    <span class="k">if</span> <span class="s2">&quot;version&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;spec_info&quot;</span><span class="p">]:</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;&quot;version&quot; key is missing from spec &gt; spec_info!&#39;</span><span class="p">)</span>
+
+    <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">],</span>
+                <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;spec_info&#39;</span><span class="p">][</span><span class="s1">&#39;version&#39;</span><span class="p">]]</span>
+
+    <span class="c1"># Ensure semantic versioning</span>
+    <span class="k">for</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">versions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[0-9]+[.][0-9]+[.][0-9]+&#39;</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+           <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&quot;version&quot; </span><span class="si">%s</span><span class="s1"> needs to use semantic versioning (x.x.x), </span>
+<span class="s1">                         see semvar.org&#39;&#39;&#39;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="mapping"><a class="viewcode-back" href="../../../../../openschemas.main.validate.criteria.html#openschemas.main.validate.criteria.structure.mapping">[docs]</a><span class="k">def</span> <span class="nf">mapping</span><span class="p">(</span><span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;test the mapping subgroup in the specification</span>
+
+<span class="sd">        mapping:</span>
+<span class="sd">          - name: Check for valid structure of list of mappings</span>
+<span class="sd">          - level: error</span>
+<span class="sd">          - function: openschemas.main.validate.criteria.structure.mapping</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="s2">&quot;mapping&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;&quot;mapping&quot; key is missing from specification upper level!&#39;</span><span class="p">)</span>
+
+    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;bsc_description&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;cardinality&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;controlled_vocab&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;expected_types&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;marginality&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;property&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s1">&#39;type_url&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)]</span>
+
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">]:</span>
+
+        <span class="c1"># Test required fields</span>
+        <span class="n">_test_fields</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">required_fields</span><span class="p">)</span>
+
+        <span class="c1"># Warning about extra fields</span>
+        <span class="n">extra_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_fields</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">bot</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Extra fields </span><span class="si">%s</span><span class="s1"> found, are they intentional?&#39;</span> 
+                         <span class="o">%</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extra_fields</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<span class="c1">################################################################################</span>
+<span class="c1"># Helpers for structure tests ##################################################</span>
+<span class="c1">################################################################################</span>
+
+<span class="k">def</span> <span class="nf">_test_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">passing_codes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;ensure that a url, when using &quot;GET&quot; returns a passing code.</span>
+<span class="sd">       </span>
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       url: the string url to get</span>
+<span class="sd">       passing_codes: a list of passing codes</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">passing_codes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">passing_codes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">passing_codes</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">passing_codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">passing_codes</span><span class="p">]</span>
+
+    <span class="n">bot</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;Testing&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span> <span class="s1">&#39;URL </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">url</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;CYAN&#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">passing_codes</span><span class="p">:</span>
+        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Invalid response code </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;the shared function to test for a particular set of fields!</span>
+<span class="sd">       The input spec should be a list of tuples, with each entry as:</span>
+<span class="sd">       (key, type, url, required)</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       spec: the dictionary (or derivative) of the loaded specification</span>
+<span class="sd">       fields: a list of tuples, each with (key, type, url, required)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">entry_type</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">is_url</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[field:</span><span class="si">%s</span><span class="s1">}&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Check 1. Check existence, if not valid, return</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">required</span><span class="p">:</span>
+                <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is missing, invalid&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>        
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bot</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is missing.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+       
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># Check 2: check for type</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">entry_type</span><span class="p">):</span>
+                <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Invalid type </span><span class="si">%s</span><span class="s1"> for </span><span class="si">%s</span><span class="s1">, invalid&#39;</span> <span class="o">%</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span> 
+                                                              <span class="n">name</span><span class="p">))</span> 
+            <span class="c1"># Check 3: if URL should return 200</span>
+            <span class="k">if</span> <span class="n">is_url</span><span class="p">:</span> <span class="n">_test_url</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+
+            <span class="c1"># Check 4: if required, should be present and defined</span>
+            <span class="k">if</span> <span class="n">required</span><span class="p">:</span>
+
+                <span class="c1"># Case 1: string</span>
+                <span class="k">if</span> <span class="n">entry_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+                        <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is required, but not defined.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
