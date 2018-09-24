@@ -1,4 +1,5 @@
-from .fileio import ( 
+from openschemas.utils.fileio import ( 
+    load_module,
     mkdir_p, 
     write_file, 
     write_json,
@@ -7,9 +8,9 @@ from .fileio import (
     read_yaml
 )
 
-from .web import clone
+from openschemas.utils.web import clone
 
-from .terminal import ( 
+from openschemas.utils.terminal import ( 
     get_installdir,
     stream_command,
     run_command

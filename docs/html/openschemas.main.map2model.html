@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.map2model package &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="openschemas.main.validate package" href="openschemas.main.validate.html" />
+    <link rel="prev" title="openschemas.main.base package" href="openschemas.main.base.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">openschemas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="openschemas.html">openschemas package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="openschemas.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="openschemas.cli.html">openschemas.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="openschemas.logger.html">openschemas.logger package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="openschemas.main.html">openschemas.main package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="openschemas.utils.html">openschemas.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="openschemas.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="openschemas.html#module-openschemas.version">openschemas.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="openschemas.html#module-openschemas">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">openschemas</a> &raquo;</li>
+        
+          <li><a href="openschemas.html">openschemas package</a> &raquo;</li>
+        
+          <li><a href="openschemas.main.html">openschemas.main package</a> &raquo;</li>
+        
+      <li>openschemas.main.map2model package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/openschemas.main.map2model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="openschemas-main-map2model-package">
+<h1>openschemas.main.map2model package<a class="headerlink" href="#openschemas-main-map2model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openschemas.main.map2model.file_manager">
+<span id="openschemas-main-map2model-file-manager-module"></span><h2>openschemas.main.map2model.file_manager module<a class="headerlink" href="#module-openschemas.main.map2model.file_manager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openschemas.main.map2model.file_manager.FolderDigger">
+<em class="property">class </em><code class="descclassname">openschemas.main.map2model.file_manager.</code><code class="descname">FolderDigger</code><span class="sig-paren">(</span><em>config_file_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/file_manager.html#FolderDigger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.file_manager.FolderDigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="openschemas.main.map2model.file_manager.FolderDigger.get_specification_list">
+<code class="descname">get_specification_list</code><span class="sig-paren">(</span><em>input_folder</em>, <em>key='specifications'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/file_manager.html#FolderDigger.get_specification_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.file_manager.FolderDigger.get_specification_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a list of specifications based on those defined in the
+configuration.yml and then found in the specifications folder.</p>
+<p>input_folder: the folder with subfolders of specifications
+key: the key to lookup in the configurations.yml (default is
+specifications)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.file_manager.FolderDigger.get_specs">
+<code class="descname">get_specs</code><span class="sig-paren">(</span><em>spec_config</em>, <em>input_folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/file_manager.html#FolderDigger.get_specs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.file_manager.FolderDigger.get_specs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openschemas.main.map2model.file_manager.FolderDigger.yml_config">
+<code class="descname">yml_config</code><em class="property"> = ''</em><a class="headerlink" href="#openschemas.main.map2model.file_manager.FolderDigger.yml_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openschemas.main.map2model.mapping">
+<span id="openschemas-main-map2model-mapping-module"></span><h2>openschemas.main.map2model.mapping module<a class="headerlink" href="#module-openschemas.main.map2model.mapping" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openschemas.main.map2model.mapping.MappingParser">
+<em class="property">class </em><code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">MappingParser</code><span class="sig-paren">(</span><em>metadata=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#MappingParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="openschemas.main.map2model.mapping.MappingParser.check_url">
+<code class="descname">check_url</code><span class="sig-paren">(</span><em>spec_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#MappingParser.check_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser.check_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>check_url doesn’t exit if the address isn’t found, etc.
+it just adds the string “err_404” as metadata given these cases.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.mapping.MappingParser.get_description">
+<code class="descname">get_description</code><span class="sig-paren">(</span><em>spec_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#MappingParser.get_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser.get_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.mapping.MappingParser.get_mapping">
+<code class="descname">get_mapping</code><span class="sig-paren">(</span><em>spec_sheet=None</em>, <em>bioschemas_sheet=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#MappingParser.get_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser.get_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a mapping, meanng the full properties given a specification sheet
+and a bioschemas sheet. If files aren’t provided, the defaults defined
+at self.defaults.paths are used.</p>
+<p>spec_sheet: the sheet with basic information (description, name, etc.)
+bioschemas_sheet: sheet (tsv) with bioschemas fields</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openschemas.main.map2model.mapping.MappingParser.metadata">
+<code class="descname">metadata</code><em class="property"> = {}</em><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.mapping.MappingParser.set_metadata">
+<code class="descname">set_metadata</code><span class="sig-paren">(</span><em>metadata</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#MappingParser.set_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.MappingParser.set_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_dict_from_row">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_dict_from_row</code><span class="sig-paren">(</span><em>row</em>, <em>headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_dict_from_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_dict_from_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>a row is typically a list of values, assigned to another list of headers.
+this function parses a known set of headers and enters them into
+the expected values for bioschemas attributes. We return a dict.</p>
+<p>row: the row (list) of values from the bioschemas tsv file
+headers: the headers that are expected (already validated)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_expected_types">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_expected_types</code><span class="sig-paren">(</span><em>expected_types</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_expected_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_expected_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that receives an string with expected types
+and generates an array with each expected type</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_formatted_props">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_formatted_props</code><span class="sig-paren">(</span><em>sdo_props</em>, <em>mapping_props</em>, <em>spec_name</em>, <em>spec_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_formatted_props"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_formatted_props" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function combines the parsed mapping properties (importantly, 
+mapping_props needs to “parent” field added) with the properties
+from the standard ontology</p>
+<p>::Note: this function needs testing for a type</p>
+<p>sdo_props: standard ontology (shared) properties
+mapping_props: result from get_mapping_properties (bioschemas_file)
+spec_name: the name of the specification (specification_file)
+spec_type: the type of the specification (specification_file)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_hierarchy">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_hierarchy</code><span class="sig-paren">(</span><em>props_dic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_hierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_mapping_properties">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_mapping_properties</code><span class="sig-paren">(</span><em>bioschemas_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_mapping_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_mapping_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>use the bioschemas field file and the specification type to
+return a list of type properties. The bioschemas file 
+should already be validated for correct headers.</p>
+<p>bioschemas_file: the &lt;Template&gt; - Bioschemas.tsv file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_properties_in_hierarchy">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_properties_in_hierarchy</code><span class="sig-paren">(</span><em>type_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_properties_in_hierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_properties_in_hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_property_in_hierarchy">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_property_in_hierarchy</code><span class="sig-paren">(</span><em>sdo_props</em>, <em>mapping_property</em>, <em>prop_type='new_sdo'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_property_in_hierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_property_in_hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>if a mapping property (indexed by its name, which is key “property”)
+if found as a key in sdo_props at a particular entity (e.g., Thing)
+then we’ve found it in the sdo, and grab it’s description for use from
+the sdo. If we don’t find it, we return the type as a “new_sdo”</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.get_row_value">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">get_row_value</code><span class="sig-paren">(</span><em>field</em>, <em>row</em>, <em>headers</em>, <em>default=''</em>, <em>clean=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#get_row_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.get_row_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a value from a list based on a field name that is expected to 
+appear in headers. This allows for change in the ordering of fields
+as long as the header is correctly labeled. The default value of
+an empty string is returned, and we clean by stripping spaces and
+newlines.</p>
+<p>field: the field to look up
+row: the row (list) of values
+headers: the list of field names (header of the tsv file) to match field
+default: the default value to return, if not found
+clean: boolean to indicate wanting to strip newlines and spaces</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.main.map2model.mapping.load_tsv">
+<code class="descclassname">openschemas.main.map2model.mapping.</code><code class="descname">load_tsv</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/mapping.html#load_tsv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.mapping.load_tsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>load a tsv file using the csv default provided reader!</p>
+<p>filename: the file name to load, will return list (rows) of
+lists (columns)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openschemas.main.map2model.parser">
+<span id="openschemas-main-map2model-parser-module"></span><h2>openschemas.main.map2model.parser module<a class="headerlink" href="#module-openschemas.main.map2model.parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openschemas.main.map2model.parser.FrontMatterParser">
+<em class="property">class </em><code class="descclassname">openschemas.main.map2model.parser.</code><code class="descname">FrontMatterParser</code><span class="sig-paren">(</span><em>input_folder='specifications'</em>, <em>output_folder=None</em>, <em>config_file_path=None</em>, <em>template=None</em>, <em>repo=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/parser.html#FrontMatterParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.parser.FrontMatterParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>the FrontEndMatterParser takes an input folder of specification
+subfolders, and a configuration.yml file, and generates a set of
+specification folders, each with a &lt;Specification&gt;.html file that
+can be contributed as a specification to the openschemas.github.io
+repository.</p>
+<dl class="method">
+<dt id="openschemas.main.map2model.parser.FrontMatterParser.parse_front_matter">
+<code class="descname">parse_front_matter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/parser.html#FrontMatterParser.parse_front_matter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.parser.FrontMatterParser.parse_front_matter" title="Permalink to this definition">¶</a></dt>
+<dd><p>the primary function to parse the provided front matter, the tsv
+files, and generate yml specifications from the templates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.parser.FrontMatterParser.save_html_template">
+<code class="descname">save_html_template</code><span class="sig-paren">(</span><em>data</em>, <em>output_name</em>, <em>template_file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/parser.html#FrontMatterParser.save_html_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.parser.FrontMatterParser.save_html_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>save an html template, meaning a jekyll template with 
+{{OPENSCHEMAS_FRONTEND_MATTER}} to replace with front matter.
+If a template isn’t defined, the default provided by the package
+is used</p>
+<p>template_file: the jekyll template to use, provided if not defined
+output_name: the name for the output file, should end in .html</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openschemas.main.map2model.validator">
+<span id="openschemas-main-map2model-validator-module"></span><h2>openschemas.main.map2model.validator module<a class="headerlink" href="#module-openschemas.main.map2model.validator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openschemas.main.map2model.validator.FolderValidator">
+<em class="property">class </em><code class="descclassname">openschemas.main.map2model.validator.</code><code class="descname">FolderValidator</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.FolderValidator.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>folder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>validate runs each set of tests, and returns a list of results.
+If any validators fail, we return a False (failed) validation,
+otherwise True</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.FolderValidator.validate_exists">
+<code class="descname">validate_exists</code><span class="sig-paren">(</span><em>folder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator.validate_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator.validate_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure the folder exists</p>
+<p>folder: full (or relative) path to folder</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.FolderValidator.validate_extension">
+<code class="descname">validate_extension</code><span class="sig-paren">(</span><em>path</em>, <em>ext='tsv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator.validate_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator.validate_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure the worksheet is a tsv file (default ends in tsv)</p>
+<p>path: a name (string) of the worksheet file
+ext: the extension to check using “endswith”</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.FolderValidator.validate_headers">
+<code class="descname">validate_headers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator.validate_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator.validate_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that headers for specific files only conform to those
+required and expected</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.FolderValidator.validate_paths">
+<code class="descname">validate_paths</code><span class="sig-paren">(</span><em>ext='tsv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#FolderValidator.validate_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.FolderValidator.validate_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that default files (self.defaults) exist in the folder
+(self.folder)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults">
+<em class="property">class </em><code class="descclassname">openschemas.main.map2model.validator.</code><code class="descname">WorksheetDefaults</code><span class="sig-paren">(</span><em>name</em>, <em>folder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.get_headers">
+<code class="descname">get_headers</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.get_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.get_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a headers list for a particular key in the names of
+defaults.</p>
+<p>key: the key in the self.lookup to get default headers for</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.get_names">
+<code class="descname">get_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.get_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.get_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.get_paths">
+<code class="descname">get_paths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.get_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.get_paths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.load_name">
+<code class="descname">load_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.load_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.load_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>load a tsv based on its name, the key in the self.paths lookup</p>
+<p>name: the file key to load.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.set_names">
+<code class="descname">set_names</code><span class="sig-paren">(</span><em>name</em>, <em>ext='tsv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.set_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.set_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>define expected set of file names (basepath) 
+based on Specification Name</p>
+<p>name: the name of the specification</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openschemas.main.map2model.validator.WorksheetDefaults.set_paths">
+<code class="descname">set_paths</code><span class="sig-paren">(</span><em>folder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model/validator.html#WorksheetDefaults.set_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.validator.WorksheetDefaults.set_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>define expected set of file (fullpath) from names lookup with
+a folder name.</p>
+<p>name: the name of the specification</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openschemas.main.map2model">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-openschemas.main.map2model" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openschemas.main.map2model.main">
+<code class="descclassname">openschemas.main.map2model.</code><code class="descname">main</code><span class="sig-paren">(</span><em>config_yml=None</em>, <em>folder=None</em>, <em>output=None</em>, <em>template=None</em>, <em>repo=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/main/map2model.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.main.map2model.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>entrypoint function for map2model, when used by the openschemas client.</p>
+<p>config: The configuration.yml. If not defined, defaults to that in PWD.
+folder: the input folder where specification subfolders are expected. 
+If not defined, defaults to “specifications”
+output: the output folder for specification files. If not defined, 
+defaults to “spec files”
+template: the template to use for the specification. Defaults to
+“template.html” provided by the module
+repo: the repository where the specification will be published.
+defaults to openschemas/specifications</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="openschemas.main.validate.html" class="btn btn-neutral float-right" title="openschemas.main.validate package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="openschemas.main.base.html" class="btn btn-neutral" title="openschemas.main.base package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

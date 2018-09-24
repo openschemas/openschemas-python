@@ -1,0 +1,12 @@
+version: 1
+checks:
+    pass:
+      - name: Dummy criteria that always returns warning
+      - level: log
+      - function: openschemas.main.validate.criteria.base.dummy
+    fail:
+      - name: Dummy criteria that always returns log
+      - level: error
+      - function: openschemas.main.validate.criteria.base.dummy
+      - kwargs:
+          - passing: False

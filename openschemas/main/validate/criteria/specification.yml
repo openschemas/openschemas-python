@@ -1,0 +1,57 @@
+# The format of this file is based on levels, messages, and functions.
+# It is intended to be run against a single yml file loaded as json. The
+# intention is to make it easy to write and understand these criteria. The
+# format is the following:
+
+# SECTION DEFINITIONS
+# - the version of the criteria format is under version
+# - checks: is the group that is run for validation
+# - the first field under checks is for a group of checks. You can name it
+#   whatever is appropriate for your need (e.g., titles)
+# - name: corresponds to the name of the subsection (a check)
+# - function: is the python module --> function that is run
+# - level: is the python logger level to emit.
+# - the subsuections underneath are also different named (individual) checks
+# - args: should be a list of named (or not named) arguments.
+
+# It's helpful to look at the example below and then reference the above!
+
+# WRITING FUNCTIONS
+
+# Each function should have the first variable be the file being checked, or
+# the loaded specification as a json-derivative (python dictionary). If 
+# running from the command line, you would need to provide the path to this
+# criteria and the file. If you want to save the redundant loads, you can run
+# the validations from within python (and provide the data structure as 
+# variable.
+
+# Each of the checks (the functions that you write and provide) should return
+# True (passed) or False (failed). You can print output to help the user to
+# your heart's content.
+
+version: 1
+checks:
+    global:
+      - name: Check for required global sections and metadata
+      - level: error
+      - function: openschemas.main.validate.criteria.structure.required
+
+    metadata:
+      - name: Check for suggested (not required) fields
+      - level: warning
+      - function: openschemas.main.validate.criteria.structure.optional
+
+    spec_info:
+      - name: Check that spec_info has all required subfields
+      - level: error
+      - function: openschemas.main.validate.criteria.structure.spec_info
+
+    mapping:
+      - name: Check for valid structure of list of mappings
+      - level: error
+      - function: openschemas.main.validate.criteria.structure.mapping
+
+    semvar:
+      - name: Check that the version strings use semantic versioning (x.x.x)
+      - level: error
+      - function: openschemas.main.validate.criteria.structure.semvar

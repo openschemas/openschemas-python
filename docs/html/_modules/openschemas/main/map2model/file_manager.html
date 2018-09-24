@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.map2model.file_manager &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../main.html">openschemas.main</a> &raquo;</li>
+        
+          <li><a href="../map2model.html">openschemas.main.map2model</a> &raquo;</li>
+        
+      <li>openschemas.main.map2model.file_manager</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.map2model.file_manager</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2018, Vanessa Sochat All rights reserved.</span>
+<span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="kn">from</span> <span class="nn">openschemas.utils.managers</span> <span class="k">import</span> <span class="n">YamlManager</span>
+<span class="kn">from</span> <span class="nn">.validator</span> <span class="k">import</span> <span class="n">FolderValidator</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">here</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<div class="viewcode-block" id="FolderDigger"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.file_manager.FolderDigger">[docs]</a><span class="k">class</span> <span class="nc">FolderDigger</span><span class="p">:</span>
+
+    <span class="n">yml_config</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">specs_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_file_path</span> <span class="o">=</span> <span class="n">config_file_path</span> <span class="ow">or</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/configuration.yml&#39;</span> <span class="o">%</span><span class="n">here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yml_config</span> <span class="o">=</span> <span class="n">YamlManager</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span>
+       
+<div class="viewcode-block" id="FolderDigger.get_specs"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.file_manager.FolderDigger.get_specs">[docs]</a>    <span class="k">def</span> <span class="nf">get_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec_config</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">):</span>
+        <span class="n">specs_list</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">current_config</span> <span class="ow">in</span> <span class="n">spec_config</span><span class="p">:</span>
+
+            <span class="c1"># If name not defined, will skip because None</span>
+            <span class="n">spec_name</span> <span class="o">=</span> <span class="n">current_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+
+            <span class="c1"># The names of the folders and files are predictable</span>
+            <span class="n">spec_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="n">spec_name</span><span class="p">)</span>
+
+            <span class="c1"># Validate specification</span>
+            <span class="n">validator</span> <span class="o">=</span> <span class="n">FolderValidator</span><span class="p">(</span><span class="n">spec_folder</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+
+                <span class="c1"># Get lookup dictionary of all default files</span>
+                <span class="n">paths</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()</span>
+                <span class="n">current_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+                <span class="n">specs_list</span><span class="p">[</span><span class="n">spec_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_config</span>
+
+        <span class="k">return</span> <span class="n">specs_list</span></div>
+
+<div class="viewcode-block" id="FolderDigger.get_specification_list"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.file_manager.FolderDigger.get_specification_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_specification_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;specifications&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;get a list of specifications based on those defined in the</span>
+<span class="sd">           configuration.yml and then found in the specifications folder.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           input_folder: the folder with subfolders of specifications</span>
+<span class="sd">           key: the key to lookup in the configurations.yml (default is</span>
+<span class="sd">           specifications)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading Configuration file.&quot;</span><span class="p">)</span>
+        <span class="n">loaded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">yml_config</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+        <span class="n">spec_config</span> <span class="o">=</span> <span class="n">loaded</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">all_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_specs</span><span class="p">(</span><span class="n">spec_config</span><span class="p">,</span> <span class="n">input_folder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> mapping files obtained.&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_specs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">all_specs</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenSchemas map2model &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>OpenSchemas map2model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/map2model/README.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="openschemas-map2model">
+<h1>OpenSchemas map2model<a class="headerlink" href="#openschemas-map2model" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/openschemas/spec-template/raw/master/img/hexagon_square_small.png"><img alt="https://github.com/openschemas/spec-template/raw/master/img/hexagon_square_small.png" src="https://github.com/openschemas/spec-template/raw/master/img/hexagon_square_small.png" /></a>
+<p>This version of <strong>map2model</strong> is a simplified version of Python module
+derived from the <a class="reference external" href="http://bioschemas.org/groups/">Bioschemas Groups</a>. It will help you
+to create an OpenSchema intended for submission to <a class="reference external" href="schemas.org">schemas.org</a>, with
+a focus on tech / hpc specifications that might not fall cleanly under strictly
+biological sciences, but support open science.</p>
+<p><strong>map2model</strong> retrieves properties and schema.org (Marginality, Cardinality and Controlled Vocabularies)
+using mapping files (in a specifications folder, see an <a class="reference external" href="https://www.github.com/openschemas/spec-container">example here</a>)
+then classifies properties into two groups:</p>
+<ol class="arabic simple">
+<li><strong>Extended properties:</strong> Properties that are part of the extended schema.org Type.</li>
+<li><strong>New properties:</strong> Properties that are new to the schema.org vocabulary or are completely new to schema.org.</li>
+</ol>
+<p>After classifying the properties, <strong>map2model</strong> generates Markdown file(s)
+that can be interpreted by <a class="reference external" href="https://openschemas.github.io">openschemas.github.io</a></p>
+<a class="reference external image-reference" href="https://github.com/openschemas/map2model/raw/master/docs/img/map2model_workflow.png"><img alt="map2model workflow" src="https://github.com/openschemas/map2model/raw/master/docs/img/map2model_workflow.png" /></a>
+<blockquote>
+<div>If you want to modify the Flow Chart open the <a class="reference external" href="docs/img/map2model_workflow.xml">xml file</a> and name it <code class="docutils literal"><span class="pre">map2model_workflow.png</span></code> in the <em>doc &gt; img</em>.</div></blockquote>
+<div class="section" id="contribute-a-specification">
+<h2>Contribute a Specification<a class="headerlink" href="#contribute-a-specification" title="Permalink to this headline">¶</a></h2>
+<p>Do you want to contribute a specification? Your workflow will look like this:</p>
+<ol class="arabic simple">
+<li>Create your specification easily using <a class="reference external" href="https://docs.google.com/spreadsheets/d/1Ty69GRzc3xuvfpEIRHjfl_9L25MNFfrKXCdwrpxYslo/edit?usp=sharing">Google Sheets</a></li>
+<li>Fork the <a class="reference external" href="https://www.github.com/openschemas/spec-template">template repository</a> and download them to it. You can also see a live example, <a class="reference external" href="https://www.github.com/openschemas/spec-container">soec-container</a> that also has content in Github Pages. When you connect your forked repository to CircleCI it will use the <a class="reference external" href="https://www.github.com/openschemas/schema-builder">schema-builder</a> to generate the files as artifacts or back to github pages. You can use the same <code class="docutils literal"><span class="pre">schema-builder</span></code> container to do this locally.</li>
+<li>Issue a pull request to the <a class="reference external" href="https://www.github.com/openschemas/specifications">specifications</a> repository with your contribution! This means:<ul>
+<li>forking the repository, cloning your fork</li>
+<li>adding your <code class="docutils literal"><span class="pre">MySpecification.html</span></code> file to the <code class="docutils literal"><span class="pre">_specifications</span></code> folder</li>
+<li>opening a pull request for review</li>
+</ul>
+</li>
+</ol>
+<p>We encourage this setup so that each of the specifications is maintained in a modular fashion. You can
+maintain your specification (and issues / discussion around it) in its own Git repository,
+to ensure modularity and version control of examples and associated documentation. We would be happy to
+create for you an <code class="docutils literal"><span class="pre">openschemas/spec-&lt;NAME&gt;</span></code> repository here if you want to join the Github organization
+and get support from the maintainers within!</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>This usage details native usage of map2model, which isn’t reproducible and not the recommended approach!
+However if you are building software with it, you will need to know this. If not, we recommend first the
+<a class="reference external" href="https://www.github.com/openschemas/spec-template">template</a> and the docker
+<a class="reference external" href="https://www.github.com/openschemas/schema-builder">openschemas/schema-builder</a> that
+packages map2model and is used by the template.</p>
+<div class="section" id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<p>These instructions are for local usage.</p>
+<p>Before starting, please ensure you have the following installed:</p>
+<ol class="arabic simple">
+<li>Git <a class="reference external" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
+<li>Python 3  <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></li>
+<li>Pip <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">https://pip.pypa.io/en/stable/installing/</a></li>
+</ol>
+</div>
+<div class="section" id="executing-map2model">
+<h3>Executing map2model<a class="headerlink" href="#executing-map2model" title="Permalink to this headline">¶</a></h3>
+<p>Clone the <strong>map2model</strong> repository: <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/OpenSchemas/map2model.git</span></code></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/OpenSchemas/map2model.git
+<span class="nb">cd</span> map2model
+</pre></div>
+</div>
+<p>Install dependencies</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python3 -m pip install -r requirements.txt
+</pre></div>
+</div>
+<p>If you want to add a specification, add an entry to [spec2model/configuration.yml]. This file tells map2model which specifications exist. To create a new specification, the section that you need to add includes:</p>
+<div class="highlight-guess"><div class="highlight"><pre><span></span>- name: NameOfMySpec
+  status: revision
+  spec_type: Profile
+  use_cases_url:
+  version: 0.2.0
+  parent_type: CreativeWork
+</pre></div>
+</div>
+<p>For usage, ask the run.py script:</p>
+<div class="highlight-guess"><div class="highlight"><pre><span></span>python3 run.py --help
+usage: run.py [-h] [--config CONFIG] [--folder SPECS] [--output OUTFOLDER]
+              [--template TEMPLATE] [--repo REPO]
+
+map2model
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --config CONFIG      configuration.yml file, defaults to configuration.yml
+                       in folder
+  --folder SPECS       folder with input specification subfolders
+  --output OUTFOLDER   folder to write output specification subfolders
+  --template TEMPLATE  template for openschemas.github.io. Should not need
+                       change.
+  --repo REPO          final repo intended for specifications.
+usage: run.py [-h] [--config CONFIG] [--folder SPECS] [--output OUTFOLDER]
+              [--template TEMPLATE] [--repo REPO]
+
+map2model
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --config CONFIG      configuration.yml file, defaults to configuration.yml
+                       in folder
+  --folder SPECS       folder with input specification subfolders
+  --output OUTFOLDER   folder to write output specification subfolders
+  --template TEMPLATE  template for openschemas.github.io. Should not need
+                       change.
+  --repo REPO          final repo intended for specifications.
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://www.github.com/openschemas/schema-builder">schema-builder</a> for
+good examples of these various arguments.</p>
+<p>We provide a <a class="reference external" href="https://docs.google.com/spreadsheets/d/1Ty69GRzc3xuvfpEIRHjfl_9L25MNFfrKXCdwrpxYslo/edit?usp=sharing">Google Drive sheets template</a> that you can use to do this, and simply export each sheet as .tsv (tab separated values). This means that four files should go into your <code class="docutils literal"><span class="pre">_NameOfMySpec</span></code> folder. While your specification is a draft, the name of the folder will start with an underscore (<code class="docutils literal"><span class="pre">_NameOfMySpec</span></code>). When you are done, remove the underscore (<code class="docutils literal"><span class="pre">NameOfMySpec</span></code>).</p>
+<p>When you are finished with your spec, run the script to generate files in <em>map2model &gt; docs &gt; spec_files</em>. Check that your folder is present!</p>
+<div class="highlight-guess"><div class="highlight"><pre><span></span>tree docs/spec_files
+├── Container
+│   ├── Container.html
+│   ├── Container.yml
+│   ├── examples
+│   │   └── README.md
+│   └── README.md
+└── DataCatalog
+    ├── DataCatalog.html
+    ├── DataCatalog.yml
+    ├── examples
+    │   └── README.md
+    └── README.md
+</pre></div>
+</div>
+<p>If you are generating specifications for contribution, you will next want to
+open a pull request (PR) to update the <a class="reference external" href="https://www.github.com/openschemas/specifications">specifications</a> repository.
+Specifically, add the <a href="#id3"><span class="problematic" id="id4">*</span></a>.html files to the <a class="reference external" href="https://github.com/openschemas/specifications/tree/master/_specifications">_specifications folder</a> in this repository.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

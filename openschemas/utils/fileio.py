@@ -102,9 +102,12 @@ def write_file(filename, content, mode="w"):
 
 def write_json(json_obj, filename, mode="w", print_pretty=True):
     '''write_json will (optionally,pretty print) a json object to file
-    :param json_obj: the dict to print to json
-    :param filename: the output file to write to
-    :param pretty_print: if True, will use nicer formatting
+
+    Parameters
+    ==========
+    json_obj: the dict to print to json
+    filename: the output file to write to
+    pretty_print: if True, will use nicer formatting
     '''
     with open(filename, mode) as filey:
         if print_pretty:
@@ -171,9 +174,27 @@ def read_yaml(filename, mode='r', quiet=False):
 # environment / options
 ################################################################################
 
+def load_module(module_str):
+    '''load a module based on a string name.
+
+       Parameters
+       ==========
+       module_str: complete python path to module (and function). Note that this
+       MUST be a python module (module.py) and not a function in an __init__.py
+    '''
+    module_str, function = module_str.rsplit('.', 1)
+    module = __import__(module_str, fromlist=[''])
+    return getattr(module, function)
+    
+
 def convert2boolean(arg):
     '''convert2boolean is used for environmental variables
-    that must be returned as boolean'''
+       that must be returned as boolean
+
+       Parameters
+       ==========
+       arg: the argument (string) to parse and check for indicators of boolean
+    '''
     if not isinstance(arg, bool):
         return arg.lower() in ("yes", "true", "t", "1", "y")
     return arg
@@ -181,10 +202,13 @@ def convert2boolean(arg):
 
 def getenv(variable_key, default=None, required=False, silent=True):
     '''getenv will attempt to get an environment variable. If the variable
-    is not found, None is returned.
-    :param variable_key: the variable name
-    :param required: exit with error if not found
-    :param silent: Do not print debugging information for variable
+       is not found, None is returned.
+
+        Parameters
+        ==========
+        variable_key: the variable name
+        required: exit with error if not found
+        silent: Do not print debugging information for variable
     '''
     variable = os.environ.get(variable_key, default)
     if variable is None and required:

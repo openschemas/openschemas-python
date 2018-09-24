@@ -1,0 +1,8 @@
+specifications:
+- name: DataCatalog 
+  status: revision
+  spec_type: Profile
+  use_cases_url: https://www.github.com/vsoch/bioschema-container
+  spec_mapping_url: https://docs.google.com/spreadsheets/d/1-Q928CHdkvfsqivFV-oDSKrJDlWx4FIbXYCAcEJyZWY/edit#gid=1483018794
+  version: 0.0.1
+  parent_type: CreativeWork

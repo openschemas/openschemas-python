@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>openschemas.main.map2model.validator &mdash; openschemes Python 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> openschemes Python
+          
+
+          
+            
+            <img src="../../../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">OpenSchemas Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#quick-start">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">openschemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributor’s Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#contributing">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python">Github</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://openschemas.github.io">Open Schemas</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.github.com/openschemas/openschemas-python/issues">Issues</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">openschemes Python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../main.html">openschemas.main</a> &raquo;</li>
+        
+          <li><a href="../map2model.html">openschemas.main.map2model</a> &raquo;</li>
+        
+      <li>openschemas.main.map2model.validator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openschemas.main.map2model.validator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2018, Vanessa Sochat All rights reserved.</span>
+<span class="c1"># See the LICENSE in the main repository at:</span>
+<span class="c1">#    https://www.github.com/openschemas/openschemas-python</span>
+
+<span class="kn">from</span> <span class="nn">.mapping</span> <span class="k">import</span> <span class="n">load_tsv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="FolderValidator"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator">[docs]</a><span class="k">class</span> <span class="nc">FolderValidator</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;[folder-validator:</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span> <span class="o">=</span> <span class="n">WorksheetDefaults</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FolderValidator.validate"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;validate runs each set of tests, and returns a list of results.</span>
+<span class="sd">           If any validators fail, we return a False (failed) validation,</span>
+<span class="sd">           otherwise True</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">validate_exists</span><span class="p">(</span><span class="n">folder</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">validate_paths</span><span class="p">()]</span>
+
+
+        <span class="c1"># First validate existing and paths</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Only then try to read files!</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_headers</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="FolderValidator.validate_exists"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator.validate_exists">[docs]</a>    <span class="k">def</span> <span class="nf">validate_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Ensure the folder exists</span>
+<span class="sd"> </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           folder: full (or relative) path to folder</span>
+<span class="sd">        &#39;&#39;&#39;</span>        
+        <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Looking for </span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">folder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid: Worksheet folder </span><span class="si">%s</span><span class="s1"> does not exist&#39;</span> <span class="o">%</span> <span class="n">folder</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="FolderValidator.validate_paths"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator.validate_paths">[docs]</a>    <span class="k">def</span> <span class="nf">validate_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;tsv&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Ensure that default files (self.defaults) exist in the folder</span>
+<span class="sd">           (self.folder) </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="c1"># 1. The path must exist</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid: Cannot find </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+            <span class="c1"># 2. If changed the defaults, we wouldn&#39;t be able to load</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_extension</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="n">ext</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+ 
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="FolderValidator.validate_headers"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator.validate_headers">[docs]</a>    <span class="k">def</span> <span class="nf">validate_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Ensure that headers for specific files only conform to those</span>
+<span class="sd">           required and expected </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="c1"># This is a list of lists, the first list is the header row</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">load_tsv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">found</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Default headers expected, including capitalization</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">get_headers</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="c1"># Missing or extra currently not allowed</span>
+            <span class="n">missing_headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">headers</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">found</span><span class="p">]</span>
+            <span class="n">extra_headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">found</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_headers</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_headers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid: Extra or missing headers for </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="FolderValidator.validate_extension"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.FolderValidator.validate_extension">[docs]</a>    <span class="k">def</span> <span class="nf">validate_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;tsv&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Ensure the worksheet is a tsv file (default ends in tsv)</span>
+<span class="sd"> </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           path: a name (string) of the worksheet file</span>
+<span class="sd">           ext: the extension to check using &quot;endswith&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid: Worksheet </span><span class="si">%s</span><span class="s1"> must have extension </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">ext</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span></div></div>
+        
+
+<div class="viewcode-block" id="WorksheetDefaults"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults">[docs]</a><span class="k">class</span> <span class="nc">WorksheetDefaults</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_paths</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+ 
+<div class="viewcode-block" id="WorksheetDefaults.get_names"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.get_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span></div>
+
+<div class="viewcode-block" id="WorksheetDefaults.get_paths"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.get_paths">[docs]</a>    <span class="k">def</span> <span class="nf">get_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span></div>
+
+<div class="viewcode-block" id="WorksheetDefaults.load_name"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.load_name">[docs]</a>    <span class="k">def</span> <span class="nf">load_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;load a tsv based on its name, the key in the self.paths lookup</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ==========</span>
+<span class="sd">        name: the file key to load.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="n">name</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="WorksheetDefaults.set_paths"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.set_paths">[docs]</a>    <span class="k">def</span> <span class="nf">set_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;define expected set of file (fullpath) from names lookup with</span>
+<span class="sd">           a folder name.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           name: the name of the specification</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">paths</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">paths</span></div>
+
+<div class="viewcode-block" id="WorksheetDefaults.set_names"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.set_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;tsv&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;define expected set of file names (basepath) </span>
+<span class="sd">           based on Specification Name</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           name: the name of the specification</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">lookup</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mapping_file&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - Mapping.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="p">),</span>
+                  <span class="s1">&#39;specification_file&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - Specification.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="p">),</span>
+                  <span class="s1">&#39;bioschemas_file&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - Bioschemas.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="p">),</span>
+                  <span class="s1">&#39;authors_file&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - Authors.</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ext</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="n">lookup</span></div>
+
+
+<div class="viewcode-block" id="WorksheetDefaults.get_headers"><a class="viewcode-back" href="../../../../openschemas.main.map2model.html#openschemas.main.map2model.validator.WorksheetDefaults.get_headers">[docs]</a>    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;get a headers list for a particular key in the names of</span>
+<span class="sd">           defaults.</span>
+<span class="sd">   </span>
+<span class="sd">           Parameters</span>
+<span class="sd">           ==========</span>
+<span class="sd">           key: the key in the self.lookup to get default headers for</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;specification_file&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;Subtitle&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;Description&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;Version&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;Official Type&#39;</span><span class="p">,</span>
+                                          <span class="s1">&#39;Full Example&#39;</span><span class="p">],</span>
+
+                   <span class="s1">&#39;mapping_file&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Property&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Expected Type&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Description&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Type&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Type URL&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;BSC Description&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Marginality&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Cardinality&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Controlled Vocabulary&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Example&#39;</span><span class="p">],</span>
+
+                   <span class="s1">&#39;authors_file&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Firstnames&#39;</span><span class="p">,</span> 
+                                    <span class="s1">&#39;Surname&#39;</span><span class="p">,</span> 
+                                    <span class="s1">&#39;Role&#39;</span><span class="p">,</span> 
+                                    <span class="s1">&#39;Institution&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Contribution&#39;</span><span class="p">],</span>
+
+                   <span class="s1">&#39;bioschemas_file&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Property&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Expected Type&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Description&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Type&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Type URL&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;BSC Description&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Marginality&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Cardinality&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Controlled Vocabulary&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;Example&quot;</span><span class="p">]}</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vanessa Sochat.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

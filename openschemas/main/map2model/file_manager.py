@@ -2,7 +2,7 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-from .config import YamlManager
+from openschemas.utils.managers import YamlManager
 from .validator import FolderValidator
 import os
 
@@ -15,7 +15,7 @@ class FolderDigger:
     def __init__(self, config_file_path = None):
         self.specs_list = {}
         self.config_file_path = config_file_path or '%s/configuration.yml' %here
-        self.yml_config = YamlManager()
+        self.yml_config = YamlManager(config_file_path)
        
     def get_specs(self, spec_config, input_folder):
         specs_list = {}
@@ -38,10 +38,19 @@ class FolderDigger:
 
         return specs_list
 
-    def get_specification_list(self, input_folder):
+    def get_specification_list(self, input_folder, key = 'specifications'):
+        '''get a list of specifications based on those defined in the
+           configuration.yml and then found in the specifications folder.
+
+           Parameters
+           ==========
+           input_folder: the folder with subfolders of specifications
+           key: the key to lookup in the configurations.yml (default is
+           specifications)
+        '''
         print("Reading Configuration file.")
-        self.yml_config.set_yml_path(self.config_file_path)
-        spec_config = self.yml_config.get_spec_yml_config()
+        loaded = self.yml_config.load()
+        spec_config = loaded[key]
         all_specs = self.get_specs(spec_config, input_folder)
         print("%s mapping files obtained." % len(all_specs))
         return all_specs

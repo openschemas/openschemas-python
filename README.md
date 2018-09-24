@@ -16,7 +16,7 @@ Github. Documentation will be provided as the library is developed.
 
 To install
 
-```bash
+```
 git clone https://www.github.com/openschemas/openschemas-python
 cd openschemas-python
 python setup.py install
@@ -26,21 +26,16 @@ or the package is hosted on [pypi](https://pypi.org/project/openschemas/) and
 can be installed with pip:
 
 ```
-pip install openschemas
+$ pip install openschemas
 
 # See the version
-openschemas --version
+$ openschemas --version
 
 # Run map2model
-map2model --config configuration.yml --folder specifications
+$ map2model --config configuration.yml --folder specifications
+
+# Run specification validator
+$ openschemas validate --criteria openschemas/main/validate/criteria/dummy.yml --infile Container.html
 ```
 
-## Usage
-
-### map2model
-
-For complete map2model usage, see the [map2model](https://www.github.com/openschemas/map2model) repository.
-
-**under development**
-
-@vsoch will return to these functions after developing the Container specifications.
+For usage, please see our [documentation](https://openschemas.github.io/openschemas-python/html/usage.html) **under development**
