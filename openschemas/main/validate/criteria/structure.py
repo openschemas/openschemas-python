@@ -1,4 +1,3 @@
-# Copyright (c) 2018, Vanessa Sochat All rights reserved.
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
@@ -11,7 +10,7 @@ from openschemas.logger import bot
 import requests
 import re
 
-def optional(infile):
+def optional(spec):
     '''optional_structure looks for a schema having optional fields, and
        issues a warning if doesn't exist. To implement this in a criteria.yml:
 
@@ -27,7 +26,7 @@ def optional(infile):
 
 def required(spec):
     '''required_structure looks for a schema's required fields, and issues
-       an error if doesn't exist. To implement this in a criteria.yml:
+       an exit if doesn't exist. To implement this in a criteria.yml:
 
         checks:
             global:
@@ -64,7 +63,7 @@ def spec_info(spec):
 
     '''
     if "spec_info" not in spec:
-        bot.error('"spec_info" key is missing from specification upper level!')
+        bot.exit('"spec_info" key is missing from specification upper level!')
 
     required_fields = [('description', str, False, True),
                        ('full_example', str, True, True),
@@ -75,7 +74,7 @@ def spec_info(spec):
 
     # Test format of version date
     if not re.search('[0-9]{8}T[0-9]{6}', spec['spec_info']['version_date']):
-        bot.error('spec_info > version_date is malformed: "YYYYMMDDTHHMMSS"')
+        bot.exit('spec_info > version_date is malformed: "YYYYMMDDTHHMMSS"')
     return True
 
 
@@ -90,11 +89,11 @@ def semvar(spec):
     '''
 
     if "version" not in spec:
-        bot.error('"version" key is missing from specification upper level!')
+        bot.exit('"version" key is missing from specification upper level!')
 
     # We don't check for "spec_info" because this test comes after required
     if "version" not in spec["spec_info"]:
-        bot.error('"version" key is missing from spec > spec_info!')
+        bot.exit('"version" key is missing from spec > spec_info!')
 
     versions = [spec['version'],
                 spec['spec_info']['version']]
@@ -102,7 +101,7 @@ def semvar(spec):
     # Ensure semantic versioning
     for version in versions:
         if not re.search('[0-9]+[.][0-9]+[.][0-9]+', version):
-           bot.error('''"version" %s needs to use semantic versioning (x.x.x), 
+           bot.exit('''"version" %s needs to use semantic versioning (x.x.x), 
                          see semvar.org''' % version)
     return True
 
@@ -118,7 +117,7 @@ def mapping(spec):
     '''
 
     if "mapping" not in spec:
-        bot.error('"mapping" key is missing from specification upper level!')
+        bot.exit('"mapping" key is missing from specification upper level!')
 
     required_fields = [('bsc_description', str, False, False),
                        ('cardinality', str, False, True),
@@ -170,7 +169,7 @@ def _test_url(url, passing_codes=None):
     bot.custom(prefix='Testing', message= 'URL %s' % url, color='CYAN')
     response = requests.get(url)
     if response.status_code not in passing_codes:
-        bot.error('Invalid response code %s' % response.status_code)
+        bot.exit('Invalid response code %s' % response.status_code)
 
 
 def _test_fields(spec, fields):
@@ -191,10 +190,12 @@ def _test_fields(spec, fields):
         is_url = entry[2]
         required = entry[3]
 
+        print('[field:%s}' % name)
+
         # Check 1. Check existence, if not valid, return
         if name not in spec:
             if required:
-                bot.error('%s is missing, invalid' % name)        
+                bot.exit('%s is missing, invalid' % name)        
             else:
                 bot.test('%s is missing.' % name)
        
@@ -202,7 +203,7 @@ def _test_fields(spec, fields):
 
             # Check 2: check for type
             if not isinstance(spec[name], entry_type):
-                bot.error('Invalid type %s for %s, invalid' %(type(spec[name]), 
+                bot.exit('Invalid type %s for %s, invalid' %(type(spec[name]), 
                                                               name)) 
             # Check 3: if URL should return 200
             if is_url: _test_url(spec[name])
@@ -213,6 +214,6 @@ def _test_fields(spec, fields):
                 # Case 1: string
                 if entry_type == str:
                     if spec[name] in ['', None]:
-                        bot.error('%s is required, but not defined.' % name)
+                        bot.exit('%s is required, but not defined.' % name)
 
     return True

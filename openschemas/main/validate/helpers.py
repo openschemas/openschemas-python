@@ -102,7 +102,7 @@ def validate_criteria(self, criteria, infile=None):
     # Loop through checks, run against specification file
     for group, checks in criteria['checks'].items():
 
-        print('[group:%s] ----- <start' % group)
+        print('[group|start:%s]' % group)
         values = dict()
         [values.update(dict(check)) for check in checks]
             
@@ -117,18 +117,22 @@ def validate_criteria(self, criteria, infile=None):
         function = load_module(function)
 
         if kwargs is None:
-            result = function(infile)
+            valid = function(infile)
         else:
             values = dict()
             [values.update(dict(kwarg)) for kwarg in kwargs]
-            result = function(infile, **values)
+            valid = function(infile, **values)
 
         print('[check:%s]' % name)
         print(' test:function %s' % function_name)
-        print(' test:result %s' % lookup[result])
+        print(' test:result %s' % lookup[valid])
         print(' test:level %s' % level)
 
-        # The logger will exit with -1 if error or below
-        bot.named(level, function_name)
+        if valid:
+            bot.test("PASSED %s" % function_name)
+        else:
+            bot.named(level, function_name)
+            if not valid:
+                sys.exit(1)
 
-        print('[group:%s] ----- end>' % group)
+        print('[group|end:%s]' % group)
