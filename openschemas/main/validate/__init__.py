@@ -2,12 +2,12 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-from openschemas.utils.managers import YamlManager
-from openschemas.main.base import RobotNamer
 from openschemas.logger import bot
-from openschemas.utils import load_module
+
 import os
 import sys
+
+here = os.path.abspath(os.path.dirname(__file__))
 
 class SpecValidator:
     '''the spec validator can "sniff" a file based on extension, and validate
@@ -24,10 +24,12 @@ class SpecValidator:
     def __repr__(self):
         return self.__str__()
 
-    def __init__(self, infile, critera=None):
+    def __init__(self, infile, criteria=None):
+
+        from openschemas.main.base import RobotNamer
 
         self.load(infile)
-        self.load_criteria(criteria)
+        self.criteria = criteria
         self.robot = RobotNamer()
 
 # Loading
@@ -47,7 +49,7 @@ class SpecValidator:
         if self.infile is not None:
 
             # If the fie exists, we can store metadata about it
-            self.name = os.bath.basename(self.infile)
+            self.name = os.path.basename(self.infile)
             self.folder = os.path.dirname(self.infile)
             self.defaults = SpecDefaults(self.name, self.folder)
 
@@ -84,7 +86,9 @@ class SpecValidator:
         if self.criteria is None:
             self.criteria = self.validate_loads(default_criteria)
 
-        bot.info('[criteria:%s]' % self.criteria.yml_path)
+        basename = os.path.basename(self.criteria.yml_path)
+
+        bot.info('[criteria:%s]' % basename)
         return self.criteria.load()
 
 # Criteria
@@ -97,6 +101,8 @@ class SpecValidator:
            infile: an input specification file
            criteria: a loaded (json/dict) or criteria, or html/yml file
         '''   
+        from openschemas.utils import load_module
+        
         # Read in the criteria - any errors will fall back to default
         if not isinstance(criteria, dict):
             criteria = self.load_criteria(criteria)
@@ -127,7 +133,7 @@ class SpecValidator:
             [values.update(dict(check)) for check in checks]
             
             # Obtain values, the only required is the function
-            name = values.get('name', robot.generate())  
+            name = values.get('name', self.robot.generate())  
             level = values.get('level', 'warning').upper()
             function = values.get('function', missing_function)
             kwargs = values.get('kwargs')
@@ -162,7 +168,7 @@ class SpecValidator:
 
            Parameters
            ==========
-           name: the name of the specification / yaml file
+           infile: the name of the specification / yaml file
            extensions: a list of valid extensions
         '''
         if extensions == None:
@@ -172,7 +178,7 @@ class SpecValidator:
             extensions = [extensions]
 
         for ext in extensions:
-            if infile.endswith(ext) and os.path.exists(name):
+            if infile.endswith(ext) and os.path.exists(infile):
                 print('Found %s, valid name' % infile)
                 return os.path.abspath(infile)
 
@@ -189,6 +195,8 @@ class SpecValidator:
            infile: the input file to attempt loading with the YamlManager,
            can be yaml or front end matter in html.
         '''
+        from openschemas.utils.managers import YamlManager
+
         manager = YamlManager(infile)
         try:
             manager.load()
@@ -295,13 +303,11 @@ class SpecValidator:
         
 
 class SpecDefaults:
-    infile = None
-    name = None
-    ext = None
 
     def __init__(self, name, folder=None):
-        self.sniff_filename(name)
-        self.paths = self.set_paths(folder)
+        self.infile = os.path.join(folder, name)
+        self.folder = os.path.abspath(folder)
+        self.name = name
  
     def get_names(self):
         return self.lookup
@@ -311,8 +317,7 @@ class SpecDefaults:
 
 
     def set_paths(self, folder=None):
-        '''define expected set of file (fullpath) from names lookup with
-           a folder name.
+        '''define expected set of files
 
            Parameters
            ==========

@@ -5,6 +5,7 @@
 from openschemas.logger import bot
 from openschemas.utils import read_file
 from ruamel.yaml import YAML
+import frontmatter
 import os
 import sys
 import re

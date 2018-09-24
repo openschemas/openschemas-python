@@ -33,6 +33,9 @@ openschemas --version
 
 # Run map2model
 map2model --config configuration.yml --folder specifications
+
+# Run specification validator
+
 ```
 
 ## Usage

@@ -34,9 +34,9 @@ checks:
     global:
       - name: Check for required global sections and metadata
       - level: error
-      - function: openschemas.main.validate.criteria.required_structure
+      - function: openschemas.main.validate.criteria.structure.required
 
     metadata:
       - name: Check for suggested (not required) fields
       - level: warning
-      - function: openschemas.main.validate.criteria.optional_structure
+      - function: openschemas.main.validate.criteria.structure.optional

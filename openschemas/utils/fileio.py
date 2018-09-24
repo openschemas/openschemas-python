@@ -176,11 +176,13 @@ def load_module(module_str):
 
        Parameters
        ==========
-       module_str: complete python path to module (and function)
+       module_str: complete python path to module (and function). Note that this
+       MUST be a python module (module.py) and not a function in an __init__.py
     '''
-    module, function = module_str.rsplit('.', 1)
-    module = __import__(module)
+    module_str, function = module_str.rsplit('.', 1)
+    module = __import__(module_str, fromlist=[''])
     return getattr(module, function)
+    
 
 def convert2boolean(arg):
     '''convert2boolean is used for environmental variables

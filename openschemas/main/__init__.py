@@ -13,10 +13,12 @@ def get_client(quiet=False, debug=False):
        debug: turn on debugging mode
 
     '''
-    from .base import Client
+    from openschemas.main.base import Client
+    from openschemas.main.validate import SpecValidator
 
     Client.quiet = quiet
     Client.debug = debug
+    Client.validator = SpecValidator
 
     # Initialize
     cli = Client()
