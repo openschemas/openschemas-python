@@ -44,7 +44,7 @@ def main():
 
     spec_parser = main(folder=args.specs,
                        output=args.outfolder,
-                       config=args.config,
+                       config_yml=args.config,
                        template=args.template,
                        repo=args.repo)
 

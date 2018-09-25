@@ -2,7 +2,7 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-__version__ = "0.0.12"
+__version__ = "0.0.13"
 AUTHOR = 'Vanessa Sochat'
 AUTHOR_EMAIL = 'vsochat@stanford.edu'
 NAME = 'openschemas'
