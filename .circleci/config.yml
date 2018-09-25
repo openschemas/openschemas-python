@@ -99,9 +99,10 @@ dockerload: &dockerload
       echo "Working directory is ${PWD}"
       docker info
       set +o pipefail
-      if [ -f /tmp/cache/container.tar.gz ]; then
+      if [ -f /tmp/cache/container1.tar.gz ]; then
           apk update && apk add --no-cache pigz curl curl-dev
-          pigz -d --stdout /tmp/cache/container.tar.gz | docker load
+          pigz -d --stdout /tmp/cache/container1.tar.gz | docker load
+          pigz -d --stdout /tmp/cache/container2.tar.gz | docker load
           docker images
       fi
 
@@ -111,12 +112,12 @@ dockersave: &dockersave
     command: |
         cat ${BASH_ENV}
         source ${BASH_ENV}
-        echo "Saving ${OPENSCHEMAS_DOCKER_USER} containers to container.tar.gz"
+        echo "Saving ${OPENSCHEMAS_DOCKER_USER} containers to container{1-2}.tar.gz"
         docker images | grep ${OPENSCHEMAS_DOCKER_USER}
         mkdir -p /tmp/cache
         echo "Saving all openschemas containers"
-        docker save ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} | pigz -2 -p 3 > /tmp/cache/container.tar.gz
-        docker save ${OPENSCHEMAS_CONTAINER}:${SCHEMA_BUILDER_VERSION} | pigz -2 -p 3 > /tmp/cache/container.tar.gz
+        docker save ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} | pigz -2 -p 3 > /tmp/cache/container1.tar.gz
+        docker save ${OPENSCHEMAS_CONTAINER}:${SCHEMA_BUILDER_VERSION} | pigz -2 -p 3 > /tmp/cache/container2.tar.gz
 
 dockerdeploy: &dockerdeploy
     name: Deploy to Docker Hub
@@ -167,7 +168,9 @@ jobs:
           keys:
             - docker-v1-{{ .Branch }}
           paths:
-            - /tmp/cache/container.tar.gz      
+            - /tmp/cache/container1.tar.gz      
+            - /tmp/cache/container2.tar.gz      
+
       - setup_remote_docker
       - run: *schemaenv
       - run: *dockerbuild
@@ -175,7 +178,8 @@ jobs:
       - persist_to_workspace:
           root: /tmp
           paths:
-            - cache/container.tar.gz
+            - cache/container1.tar.gz
+            - cache/container2.tar.gz
             - src
 
   update_cache:
@@ -186,7 +190,8 @@ jobs:
       - save_cache:
          key: docker-v1-{{ .Branch }}
          paths:
-            - /tmp/cache/container.tar.gz
+            - /tmp/cache/container1.tar.gz
+            - /tmp/cache/container2.tar.gz
 
   deploy:
     <<: *defaults
