@@ -3,7 +3,7 @@
 
 # Variables you can customize (and containers that will be built)
 # SCHEMA_BUILDER: is the schema builder name (on Docker Hub) to use.
-# OPENBASES_CONTAINER: is the container that will be built, see defaults
+# OPENSCHEMAS_CONTAINER: is the container that will be built, see defaults
 # 
 
 ################################################################################
@@ -47,6 +47,12 @@ schemaenv: &schemaenv
         if [ ! -n "${SCHEMA_BUILDER:-}" ]; then
             SCHEMA_BUILDER="openschemas/schema-builder"
         fi
+        if [ ! -n "${OPENSCHEMAS_CONTAINER:-}" ]; then
+            OPENSCHEMAS_CONTAINER="openschemas/openschemas"
+        fi
+        if [ ! -n "${OPENSCHEMAS_DOCKER_USER:-}" ]; then
+            OPENSCHEMAS_DOCKER_USER="openschemas"
+        fi
         if [ ! -n "${CIRCLE_PR_REPONAME}" ]; then
             REPO_NAME=openschemas/openschemas-python
         else
@@ -55,12 +61,14 @@ schemaenv: &schemaenv
         echo "Open Bases OpenSchema builder is ${SCHEMA_BUILDER}"
         # export to bash environment
         echo "export SCHEMA_BUILDER=${SCHEMA_BUILDER}" >> ${BASH_ENV}
+        echo "export OPENSCHEMAS_CONTAINER=${OPENSCHEMAS_CONTAINER}" >> ${BASH_ENV}
+        echo "export OPENSCHEMAS_DOCKER_USER=${OPENSCHEMAS_DOCKER_USER}" >> ${BASH_ENV}
         echo "export REPO_NAME=${REPO_NAME}" >> ${BASH_ENV}
         cat ${BASH_ENV}
 
 # Installation
-schemabuilder: &schemabuilder
-    name: Build the openschemas/schema-builder container
+dockerbuild: &dockerbuild
+    name: Build the openschemas/schema-builder and openschemas/openschemas containers
     command: |
         source ${BASH_ENV}
         cd /tmp
@@ -77,6 +85,11 @@ schemabuilder: &schemabuilder
         echo "docker tag ${SCHEMA_BUILDER}:latest ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
         docker tag "${SCHEMA_BUILDER}:latest" "${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION}"
         echo "export SCHEMA_BUILDER_VERSION=${SCHEMA_BUILDER_VERSION}" >> ${BASH_ENV}
+        cd /tmp/src
+        echo "docker build -t ${OPENSCHEMAS_CONTAINER} ."
+        docker build -t ${OPENSCHEMAS_CONTAINER} .
+        echo "docker tag "${OPENSCHEMAS_CONTAINER}:latest" "${OPENSCHEMAS_CONTAINER}:${SCHEMA_BUILDER_VERSION}""
+        docker tag "${OPENSCHEMAS_CONTAINER}:latest" "${OPENSCHEMAS_CONTAINER}:${SCHEMA_BUILDER_VERSION}"
 
 # Docker
 dockerload: &dockerload
@@ -98,9 +111,11 @@ dockersave: &dockersave
     command: |
         cat ${BASH_ENV}
         source ${BASH_ENV}
-        echo "Saving ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} to container.tar.gz"
+        echo "Saving ${OPENSCHEMAS_DOCKER_USER} containers to container.tar.gz"
+        docker images | grep ${OPENSCHEMAS_DOCKER_USER}
         mkdir -p /tmp/cache
-        docker save ${SCHEMA_BUILDER}:${SCHEMA_BUILDER_VERSION} \
+        echo "Saving all openschemas containers
+        docker save ${OPENSCHEMAS_DOCKER_USER} \
           | pigz -2 -p 3 > /tmp/cache/container.tar.gz
 
 dockerdeploy: &dockerdeploy
@@ -108,15 +123,18 @@ dockerdeploy: &dockerdeploy
     no_output_timeout: 40m
     command: |
       source ${BASH_ENV}
-      echo "Looking for ${SCHEMA_BUILDER}"
+      echo "Looking for ${SCHEMA_BUILDER}, ${OPENSCHEMAS_CONTAINER}"
       if [[ -n "$DOCKER_PASS" ]]; then
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push ${SCHEMA_BUILDER}
-            echo "Tagging latest image..."
+            docker push ${OPENSCHEMAS_CONTAINER}
+            echo "Tagging latest images..."
             DOCKER_TAG=$(docker images | grep ${SCHEMA_BUILDER} | awk '{print $2}')
             echo "Found Docker Tag ${DOCKER_TAG}"
             docker tag ${SCHEMA_BUILDER}:${DOCKER_TAG} ${SCHEMA_BUILDER}:latest
+            docker tag ${OPENSCHEMAS_CONTAINER}:${DOCKER_TAG} ${OPENSCHEMAS_CONTAINER}:latest
             docker push ${SCHEMA_BUILDER}:latest
+            docker push ${OPENSCHEMAS_CONTAINER}:latest
       fi
 
 ################################################################################
@@ -152,7 +170,7 @@ jobs:
             - /tmp/cache/container.tar.gz      
       - setup_remote_docker
       - run: *schemaenv
-      - run: *schemabuilder
+      - run: *dockerbuild
       - run: *dockersave
       - persist_to_workspace:
           root: /tmp
