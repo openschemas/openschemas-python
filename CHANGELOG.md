@@ -16,6 +16,7 @@ Critical items to know are:
 versions here coincide with releases on pypi.
 
 ## [master](https://github.com/openschemas/openschemas-python/tree/master)
+ - bug in entrypoint script for map2model (0.0.13)
  - tweaks to specification.yml for live testing in specifications repo (0.0.12)
  - validation model, including default for a specification, and dummy (0.0.11)
  - start to spinx documentation, including start to usage docs
