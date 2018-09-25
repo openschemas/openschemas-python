@@ -114,7 +114,7 @@ dockersave: &dockersave
         echo "Saving ${OPENSCHEMAS_DOCKER_USER} containers to container.tar.gz"
         docker images | grep ${OPENSCHEMAS_DOCKER_USER}
         mkdir -p /tmp/cache
-        echo "Saving all openschemas containers
+        echo "Saving all openschemas containers"
         docker save ${OPENSCHEMAS_DOCKER_USER} \
           | pigz -2 -p 3 > /tmp/cache/container.tar.gz
 
