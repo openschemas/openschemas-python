@@ -136,3 +136,5 @@ def validate_criteria(self, criteria, infile=None):
                 sys.exit(1)
 
         print('[group|end:%s]' % group)
+
+    print('ALL TESTS PASSING')
