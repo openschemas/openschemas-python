@@ -126,11 +126,11 @@ def validate_criteria(self, criteria, infile=None):
         print('[check:%s]' % name)
         print(' test:function %s' % function_name)
         print(' test:result %s' % lookup[valid])
-        print(' test:level %s' % level)
 
         if valid:
             bot.test("PASSED %s" % function_name)
         else:
+            print(' test:level %s' % level)
             bot.named(level, function_name)
             if not valid:
                 sys.exit(1)
