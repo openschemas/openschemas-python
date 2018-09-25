@@ -70,7 +70,7 @@ def spec_info(spec):
                        ('version', str, False, True),
                        ('version_date', str, False, True)]
 
-    _test_fields(spec, required_fields)
+    _test_fields(spec['spec_info'], required_fields)
 
     # Test format of version date
     if not re.search('[0-9]{8}T[0-9]{6}', spec['spec_info']['version_date']):
@@ -171,7 +171,6 @@ def _test_url(url, passing_codes=None):
     if response.status_code not in passing_codes:
         bot.exit('Invalid response code %s' % response.status_code)
 
-
 def _test_fields(spec, fields):
     '''the shared function to test for a particular set of fields!
        The input spec should be a list of tuples, with each entry as:
@@ -195,7 +194,8 @@ def _test_fields(spec, fields):
         # Check 1. Check existence, if not valid, return
         if name not in spec:
             if required:
-                bot.exit('%s is missing, invalid' % name)        
+                bot.custom(prefix='Missing', message=spec, color='CYAN')
+                bot.exit('%s is missing, invalid' % name)
             else:
                 bot.test('%s is missing.' % name)
        
@@ -203,6 +203,7 @@ def _test_fields(spec, fields):
 
             # Check 2: check for type
             if not isinstance(spec[name], entry_type):
+                bot.custom(prefix='Testing', message=entry, color='CYAN')
                 bot.exit('Invalid type %s for %s, invalid' %(type(spec[name]), 
                                                               name)) 
             # Check 3: if URL should return 200
@@ -214,6 +215,7 @@ def _test_fields(spec, fields):
                 # Case 1: string
                 if entry_type == str:
                     if spec[name] in ['', None]:
+                        bot.custom(prefix='Missing', message=spec, color='CYAN')
                         bot.exit('%s is required, but not defined.' % name)
 
     return True
