@@ -16,6 +16,7 @@ Critical items to know are:
 versions here coincide with releases on pypi.
 
 ## [master](https://github.com/openschemas/openschemas-python/tree/master)
+ - bug in get_mapping_properties indexing rows instead of row (0.0.14)
  - bug in entrypoint script for map2model (0.0.13)
  - tweaks to specification.yml for live testing in specifications repo (0.0.12)
  - validation model, including default for a specification, and dummy (0.0.11)
