@@ -169,8 +169,7 @@ jobs:
             - docker-v1-{{ .Branch }}
           paths:
             - /tmp/cache/container1.tar.gz      
-            - /tmp/cache/container2.tar.gz      
-
+            - /tmp/cache/container2.tar.gz
       - setup_remote_docker
       - run: *schemaenv
       - run: *dockerbuild

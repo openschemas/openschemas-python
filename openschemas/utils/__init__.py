@@ -3,6 +3,7 @@ from openschemas.utils.fileio import (
     mkdir_p, 
     write_file, 
     write_json,
+    write_yaml,
     read_file, 
     read_json,
     read_yaml

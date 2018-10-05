@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>openschemas.utils.fileio &mdash; openschemes Python 0.0.1 documentation</title>
+  <title>openschemas.utils.fileio &mdash; openschemes Python 0.0.14 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.0.1
+                0.0.14
               </div>
             
           
@@ -318,12 +318,33 @@
 <div class="viewcode-block" id="read_yaml"><a class="viewcode-back" href="../../../openschemas.utils.html#openschemas.utils.fileio.read_yaml">[docs]</a><span class="k">def</span> <span class="nf">read_yaml</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;read a yaml file, only including sections between dashes</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-        <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">readlines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_read_yaml</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">)</span></div>
 
-    <span class="c1"># Read yaml section</span>
-    <span class="n">section</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<div class="viewcode-block" id="write_yaml"><a class="viewcode-back" href="../../../openschemas.utils.html#openschemas.utils.fileio.write_yaml">[docs]</a><span class="k">def</span> <span class="nf">write_yaml</span><span class="p">(</span><span class="n">yaml_dict</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;write a dictionary to yaml file</span>
+<span class="sd"> </span>
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       yaml_dict: the dict to print to yaml</span>
+<span class="sd">       filename: the output file to write to</span>
+<span class="sd">       pretty_print: if True, will use nicer formatting</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">filey</span><span class="p">:</span>
+        <span class="n">filey</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">yaml_dict</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">filename</span></div>
+
+   
+<span class="k">def</span> <span class="nf">_read_yaml</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;read yaml from a string, either read from file (read_frontmatter) or </span>
+<span class="sd">       from yml file proper (read_yaml)</span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">       ==========</span>
+<span class="sd">       section: a string of unparsed yaml content.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">docs</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load_all</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -331,7 +352,26 @@
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
                 <span class="n">metadata</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-    <span class="k">return</span> <span class="n">metadata</span></div>
+    <span class="k">return</span> <span class="n">metadata</span>
+
+
+<div class="viewcode-block" id="read_frontmatter"><a class="viewcode-back" href="../../../openschemas.utils.html#openschemas.utils.fileio.read_frontmatter">[docs]</a><span class="k">def</span> <span class="nf">read_frontmatter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;read a yaml file, only including sections between dashes</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">readlines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># The yml section always comes after the --- of the frontmatter</span>
+    <span class="n">section</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_read_yaml</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="read_markdown"><a class="viewcode-back" href="../../../openschemas.utils.html#openschemas.utils.fileio.read_markdown">[docs]</a><span class="k">def</span> <span class="nf">read_markdown</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;read the OTHER part of the markdown file (remove the frontend matter)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">readlines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># The yml section always comes after the --- of the frontmatter</span>
+    <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;---&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 
@@ -422,7 +462,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.0.1',
+            VERSION:'0.0.14',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

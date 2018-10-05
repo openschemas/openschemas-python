@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>openschemas.utils package &mdash; openschemes Python 0.0.1 documentation</title>
+  <title>openschemas.utils package &mdash; openschemes Python 0.0.14 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.0.1
+                0.0.14
               </div>
             
           
@@ -259,10 +259,22 @@ and properly close the file</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="openschemas.utils.fileio.read_frontmatter">
+<code class="descclassname">openschemas.utils.fileio.</code><code class="descname">read_frontmatter</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='r'</em>, <em>quiet=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/utils/fileio.html#read_frontmatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.utils.fileio.read_frontmatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a yaml file, only including sections between dashes</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="openschemas.utils.fileio.read_json">
 <code class="descclassname">openschemas.utils.fileio.</code><code class="descname">read_json</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='r'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/utils/fileio.html#read_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.utils.fileio.read_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>read_json reads in a json file and returns
 the data structure as dict.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.utils.fileio.read_markdown">
+<code class="descclassname">openschemas.utils.fileio.</code><code class="descname">read_markdown</code><span class="sig-paren">(</span><em>filename</em>, <em>mode='r'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/utils/fileio.html#read_markdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.utils.fileio.read_markdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the OTHER part of the markdown file (remove the frontend matter)</p>
 </dd></dl>
 
 <dl class="function">
@@ -283,6 +295,15 @@ and properly close the file</p>
 <code class="descclassname">openschemas.utils.fileio.</code><code class="descname">write_json</code><span class="sig-paren">(</span><em>json_obj</em>, <em>filename</em>, <em>mode='w'</em>, <em>print_pretty=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/utils/fileio.html#write_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.utils.fileio.write_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>write_json will (optionally,pretty print) a json object to file</p>
 <p>json_obj: the dict to print to json
+filename: the output file to write to
+pretty_print: if True, will use nicer formatting</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="openschemas.utils.fileio.write_yaml">
+<code class="descclassname">openschemas.utils.fileio.</code><code class="descname">write_yaml</code><span class="sig-paren">(</span><em>yaml_dict</em>, <em>filename</em>, <em>mode='w'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openschemas/utils/fileio.html#write_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openschemas.utils.fileio.write_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a dictionary to yaml file</p>
+<p>yaml_dict: the dict to print to yaml
 filename: the output file to write to
 pretty_print: if True, will use nicer formatting</p>
 </dd></dl>
@@ -452,7 +473,7 @@ newline. Defaults to finding Progress</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.1',
+            VERSION:'0.0.14',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

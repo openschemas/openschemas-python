@@ -152,12 +152,33 @@ def read_json(filename, mode='r'):
 def read_yaml(filename, mode='r', quiet=False):
     '''read a yaml file, only including sections between dashes
     '''
-    metadata = {}
-    with open(filename, mode) as stream:
-        stream = stream.read()
+    stream = read_file(filename, mode, readlines=False)
+    return _read_yaml(stream, quiet=quiet)
 
-    # Read yaml section
-    section = stream.split('---')[1]
+
+def write_yaml(yaml_dict, filename, mode="w"):
+    '''write a dictionary to yaml file
+ 
+       Parameters
+       ==========
+       yaml_dict: the dict to print to yaml
+       filename: the output file to write to
+       pretty_print: if True, will use nicer formatting
+    '''
+    with open(filename, mode) as filey:
+        filey.writelines(yaml.dump(yaml_dict))
+    return filename
+
+   
+def _read_yaml(section, quiet=False):
+    '''read yaml from a string, either read from file (read_frontmatter) or 
+       from yml file proper (read_yaml)
+
+       Parameters
+       ==========
+       section: a string of unparsed yaml content.
+    '''
+    metadata = {}
     docs = yaml.load_all(section)
     for doc in docs:
         if isinstance(doc, dict):
@@ -166,6 +187,25 @@ def read_yaml(filename, mode='r', quiet=False):
                     print('%s: %s' %(k,v))
                 metadata[k] = v
     return metadata
+
+
+def read_frontmatter(filename, mode='r', quiet=False):
+    '''read a yaml file, only including sections between dashes
+    '''
+    stream = read_file(filename, mode, readlines=False)
+
+    # The yml section always comes after the --- of the frontmatter
+    section = stream.split('---')[1]
+    return _read_yaml(section, quiet=quiet)
+
+
+def read_markdown(filename, mode='r'):
+    '''read the OTHER part of the markdown file (remove the frontend matter)
+    '''
+    stream = read_file(filename, mode, readlines=False)
+
+    # The yml section always comes after the --- of the frontmatter
+    return stream.split('---')[-1]
 
 
 

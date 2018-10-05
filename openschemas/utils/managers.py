@@ -3,8 +3,11 @@
 #    https://www.github.com/openschemas/openschemas-python
 
 from openschemas.logger import bot
-from openschemas.utils import read_file
-from ruamel.yaml import YAML
+from openschemas.utils import ( 
+    read_yaml, 
+    read_file,
+    write_yaml
+)
 import frontmatter
 import os
 import sys
@@ -18,7 +21,6 @@ class YamlManager:
         ''' on init, if a path is provided we want to tell the user quickly
             if it doesn't exist. If the path exists, we also load.
         '''
-        self.yaml = YAML()
         self.loaded = {}
 
         # Did the user provide a path to load?
@@ -78,16 +80,15 @@ class YamlManager:
 
 # Loading
 
-    def _load_yaml(self, file_path, allow_duplicate_keys = True):
+    def _load_yaml(self, file_path):
         '''load the yaml file
 
            Parameters
            ==========
            file_path: the yaml file path to read
         '''
-        self.yaml.allow_duplicate_keys = allow_duplicate_keys
-        stream = read_file(file_path, readlines=False)
-        self.loaded = self.yaml.load(stream)
+        self.loaded = read_yaml(file_path)
+
         
     def _load_html(self, file_path):
         '''load the yaml as frontend matter from an html file
@@ -123,11 +124,12 @@ class YamlManager:
         if not re.search('(%s$)' % ext, output_file):
             output_file = "%s.%s" % (output_file, ext)
 
-        with open(output_file, mode) as outfile:
-            self.yaml.dump(content, outfile)
+        # Write the yaml to file
+        write_yaml(content, output_file, mode) 
 
     def save_yaml(self, output_file, content=None, mode = 'w'):
         return self.save_yml(output_file, content, mode, ext='yaml')
+
 
 # Reading
 
