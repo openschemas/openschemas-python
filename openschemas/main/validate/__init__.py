@@ -23,6 +23,7 @@ class BasicValidator:
     '''the basic validator doesn't care about the input file extensions,
        and gives the user more freedom to write custom validators using it. 
        We only validate that the file exists.
+
     '''
     default_criteria = '%s/criteria/dummy.yml' % here
 

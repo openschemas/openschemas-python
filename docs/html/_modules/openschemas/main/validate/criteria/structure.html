@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>openschemas.main.validate.criteria.structure &mdash; openschemes Python 0.0.1 documentation</title>
+  <title>openschemas.main.validate.criteria.structure &mdash; openschemes Python 0.0.14 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.0.1
+                0.0.14
               </div>
             
           
@@ -240,7 +240,7 @@
                        <span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
                        <span class="p">(</span><span class="s1">&#39;version_date&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)]</span>
 
-    <span class="n">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">required_fields</span><span class="p">)</span>
+    <span class="n">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;spec_info&#39;</span><span class="p">],</span> <span class="n">required_fields</span><span class="p">)</span>
 
     <span class="c1"># Test format of version date</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[0-9]</span><span class="si">{8}</span><span class="s1">T[0-9]</span><span class="si">{6}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;spec_info&#39;</span><span class="p">][</span><span class="s1">&#39;version_date&#39;</span><span class="p">]):</span>
@@ -341,7 +341,6 @@
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">passing_codes</span><span class="p">:</span>
         <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Invalid response code </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">_test_fields</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">fields</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;the shared function to test for a particular set of fields!</span>
 <span class="sd">       The input spec should be a list of tuples, with each entry as:</span>
@@ -365,7 +364,8 @@
         <span class="c1"># Check 1. Check existence, if not valid, return</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">required</span><span class="p">:</span>
-                <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is missing, invalid&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>        
+                <span class="n">bot</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;Missing&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;CYAN&#39;</span><span class="p">)</span>
+                <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is missing, invalid&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">bot</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is missing.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
        
@@ -373,6 +373,7 @@
 
             <span class="c1"># Check 2: check for type</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">entry_type</span><span class="p">):</span>
+                <span class="n">bot</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;Testing&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">entry</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;CYAN&#39;</span><span class="p">)</span>
                 <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Invalid type </span><span class="si">%s</span><span class="s1"> for </span><span class="si">%s</span><span class="s1">, invalid&#39;</span> <span class="o">%</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span> 
                                                               <span class="n">name</span><span class="p">))</span> 
             <span class="c1"># Check 3: if URL should return 200</span>
@@ -384,6 +385,7 @@
                 <span class="c1"># Case 1: string</span>
                 <span class="k">if</span> <span class="n">entry_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+                        <span class="n">bot</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;Missing&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;CYAN&#39;</span><span class="p">)</span>
                         <span class="n">bot</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is required, but not defined.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="kc">True</span>
@@ -421,7 +423,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../../',
-            VERSION:'0.0.1',
+            VERSION:'0.0.14',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

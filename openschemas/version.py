@@ -2,7 +2,7 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-__version__ = "0.0.13"
+__version__ = "0.0.14"
 AUTHOR = 'Vanessa Sochat'
 AUTHOR_EMAIL = 'vsochat@stanford.edu'
 NAME = 'openschemas'
@@ -27,10 +27,7 @@ MAP2MODEL_REQUIRES = (
     ('rdflib', {'exact_version': '4.2.2'}),
     ('rdflib-jsonld', {'exact_version': '0.4.0'}),
     ('requests', {'min_version': '2.18.1'}),
-    ('ruamel.std.argparse', {'exact_version': '0.8.1'}),
-    ('ruamel.yaml', {'exact_version': '0.15.31'}),
-    ('ruamel.yaml.cmd', {'exact_version': '0.4.2'}),
-    ('ruamel.yaml.convert', {'exact_version': '0.3.0'})
+    ('pyaml', {'min_version': '17.12.1'})
 )
 
 ALL_REQUIRES = (INSTALL_REQUIRES +

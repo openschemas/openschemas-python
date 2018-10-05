@@ -2,9 +2,9 @@
 # See the LICENSE in the main repository at:
 #    https://www.github.com/openschemas/openschemas-python
 
-from .file_manager import FolderDigger
-from .mapping import MappingParser
-from .validator import FolderValidator
+from openschemas.main.map2model.file_manager import FolderDigger
+from openschemas.main.map2model.mapping import MappingParser
+from openschemas.main.map2model.validator import FolderValidator
 from datetime import datetime
 import time
 import frontmatter

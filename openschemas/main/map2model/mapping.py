@@ -290,7 +290,7 @@ def get_mapping_properties(bioschemas_file):
         # If we want to do checks for empty cells, do it here
 
         # If Expected Type, Marginality, and Cardinaity isn't empty 
-        if row[1] != "" and rows[6] != "" and rows[7] != "":
+        if row[1] != "" and row[6] != "" and row[7] != "":
             property_dict = get_dict_from_row(row, headers)
             type_properties.append(property_dict)
 
